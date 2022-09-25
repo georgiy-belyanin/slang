@@ -11,27 +11,27 @@
 #define KEYWORD_EXT "ext"
 #define KEYWORD_IF "if"
 
-char* code = NULL;
-char symbol = ' ';
-int pos = 0;
+static char* code = NULL;
+static char cur = ' ';
+static int pos = 0;
 
-char* ident = NULL;
-int number = 0;
+static char* ident = NULL;
+static int number = 0;
 
-void next_symbol() {
-  symbol = code[pos++];
+static void next() {
+  cur = code[pos++];
 }
 void skip_spaces() {
-  while(isspace(symbol))
-    next_symbol();
+  while(isspace(cur))
+    next();
 }
 
 token_t next_word() {
   char* word = calloc(sizeof(char), 50);
 
-  for(int i = 0; i < sizeof(word) && isalnum(symbol); i++) {
-    word[i] = symbol;
-    next_symbol();
+  for(int i = 0; i < sizeof(word) && isalnum(cur); i++) {
+    word[i] = cur;
+    next();
   }
 
   if (strcmp(word, KEYWORD_FUNC) == 0)
@@ -51,20 +51,25 @@ token_t next_word() {
 }
 
 token_t next_number() {
-  while(isdigit(symbol)) {
-    number = number * 10 + (symbol - '0');
-    next_symbol();
+  number = 0;
+  while(isdigit(cur)) {
+    number = number * 10 + (cur - '0');
+    next();
   }
   return TOKEN_NUMBER;
 }
 
 token_t next_symbolic() {
-  char prev = symbol;
-  next_symbol();
+  char prev = cur;
+  next();
   if (prev == ':')
     return TOKEN_COLON;
   else if (prev == ';')
     return TOKEN_SEMI;
+  else if (prev == '.')
+    return TOKEN_DOT;
+  else if (prev == ',')
+    return TOKEN_COMMA;
   else if (prev == '(')
     return TOKEN_LPAREN;
   else if (prev == ')')
@@ -86,43 +91,43 @@ token_t next_symbolic() {
   else if (prev == '/')
     return TOKEN_DIV;
   else if (prev == '=') {
-    if (symbol == '=') {
-      next_symbol();
+    if (cur == '=') {
+      next();
       return TOKEN_EQ;
     } else {
       return TOKEN_ASSIGN;
     }
   } else if (prev == '<') {
-    if (symbol == '=') {
-      next_symbol();
+    if (cur == '=') {
+      next();
       return TOKEN_LE;
     } else {
       return TOKEN_LESS;
     }
   } else if (prev == '>') {
-    if (symbol == '=') {
-      next_symbol();
+    if (cur == '=') {
+      next();
       return TOKEN_GE;
     } else {
       return TOKEN_GRTR;
     }
   } else if (prev == '!') {
-    if (symbol == '=') {
-      next_symbol();
+    if (cur == '=') {
+      next();
       return TOKEN_NE;
     } else {
       return TOKEN_NOT;
     }
   }else if (prev == '&') {
-    if (symbol == '&') {
-      next_symbol();
+    if (cur == '&') {
+      next();
       return TOKEN_AND;
     } else {
       return TOKEN_BWAND;
     }
   } else if (prev == '|') {
-    if (symbol == '|') {
-      next_symbol();
+    if (cur == '|') {
+      next();
       return TOKEN_OR;
     } else {
       return TOKEN_BWOR;
@@ -133,21 +138,21 @@ token_t next_symbolic() {
     return TOKEN_UNKNOWN;
 }
 void seek_to_zero() {
-  symbol = ' ';
+  cur = ' ';
   pos = 0;
 }
 
 
-void lexer_set_code(char* value) {
+void lexer_set_code(char* val) {
   seek_to_zero();
-  code = value;
+  code = val;
 }
 token_t lexer_next_token() {
   skip_spaces();
 
-  if (isalpha(symbol)) {
+  if (isalpha(cur)) {
     return next_word();
-  } else if (isdigit(symbol)) {
+  } else if (isdigit(cur)) {
     return next_number();
   } else {
     return next_symbolic();

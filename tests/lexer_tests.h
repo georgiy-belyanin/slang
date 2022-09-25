@@ -1,10 +1,9 @@
 #pragma once
 
-#include "test.h"
-
 #include <string.h>
 #include "../src/lexer.h"
-#include "../src/token.h"
+#include "../src/tokens.h"
+#include "test.h"
 
 TEST(lexer, func) {
   lexer_set_code("func");
@@ -32,6 +31,26 @@ TEST(lexer, if) {
   return 0;
 }
 
+TEST(lexer, colon) {
+  lexer_set_code(":");
+  assert(lexer_next_token() == TOKEN_COLON);
+  return 0;
+}
+TEST(lexer, semi) {
+  lexer_set_code(";");
+  assert(lexer_next_token() == TOKEN_SEMI);
+  return 0;
+}
+TEST(lexer, dot) {
+  lexer_set_code(".");
+  assert(lexer_next_token() == TOKEN_DOT);
+  return 0;
+}
+TEST(lexer, comma) {
+  lexer_set_code(",");
+  assert(lexer_next_token() == TOKEN_COMMA);
+  return 0;
+}
 TEST(lexer, lparen) {
   lexer_set_code("(");
   assert(lexer_next_token() == TOKEN_LPAREN);
@@ -148,15 +167,19 @@ TEST(lexer, bwor) {
 }
 
 TEST(lexer, ident) {
-  lexer_set_code("foobar");
+  lexer_set_code("foo bar");
   assert(lexer_next_token() == TOKEN_IDENT);
-  assert(strcmp(lexer_get_ident(), "foobar") == 0);
+  assert(strcmp(lexer_get_ident(), "foo") == 0);
+  assert(lexer_next_token() == TOKEN_IDENT);
+  assert(strcmp(lexer_get_ident(), "bar") == 0);
   return 0;
 }
 TEST(lexer, number) {
-  lexer_set_code("23");
+  lexer_set_code("23 46");
   assert(lexer_next_token() == TOKEN_NUMBER);
   assert(lexer_get_number() == 23);
+  assert(lexer_next_token() == TOKEN_NUMBER);
+  assert(lexer_get_number() == 46);
   return 0;
 }
 
@@ -218,6 +241,10 @@ TESTS(lexer) {
   test_run(lexer, ext);
   test_run(lexer, if);
 
+  test_run(lexer, colon);
+  test_run(lexer, semi);
+  test_run(lexer, dot);
+  test_run(lexer, comma);
   test_run(lexer, lparen);
   test_run(lexer, rparen);
   test_run(lexer, lbracket);

@@ -37,7 +37,7 @@ TESTS_TMP_FILES=$(subst $(MAIN_TMP),$(TESTS_MAIN_TMP),$(TMP_FILES))
 TESTS_EXE_NAME=slang_tests
 TESTS_EXE_FILE=$(BIN_PATH)$(TESTS_EXE_NAME)
 
-all: $(EXE_FILE)
+all: clean $(EXE_FILE)
 tests: clean $(TESTS_EXE_FILE)
 	@$(TESTS_EXE_FILE)
 clean:

@@ -1,7 +1,6 @@
 #pragma once 
 
 #include "tokens.h"
-#include <stdlib.h>
 
 typedef enum {
 #define TOKEN(id, _) id,

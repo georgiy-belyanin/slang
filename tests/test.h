@@ -1,18 +1,17 @@
 #pragma once
 
-#include <stdio.h>
+#include "../src/utils.h"
 
-int ok = 0;
-int failed = 0;
+static int ok = 0;
+static int failed = 0;
 
-#define info(...) printf(__VA_ARGS__)
 #define success(...) printf("\x1B[32m" __VA_ARGS__ "\x1B[0m")
-#define error(...) printf("\x1B[31m" __VA_ARGS__ "\x1B[0m")
+#define fail(...) printf("\x1B[31m" __VA_ARGS__ "\x1B[0m")
 
 #define assert(condition) \
   do { \
     if (!(condition)) { \
-      info(#condition " (line: %d) ", __LINE__) ; \
+      log(#condition " (line: %d) ", __LINE__) ; \
       return -1; \
     } \
   } while(0)
@@ -20,10 +19,10 @@ int failed = 0;
 #define TEST(module, name) int test_ ## module ## _ ## name()
 #define test_run(module, name) \
   do { \
-    info("\t- Running test " #name ": "); \
+    log("\t- Running test " #name ": "); \
     if (test_ ## module ## _ ## name()) { \
       failed++; \
-      error("failed\n"); \
+      fail("failed\n"); \
     } else { \
       ok++; \
       success("ok\n"); \
