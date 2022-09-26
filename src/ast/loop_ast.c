@@ -10,3 +10,7 @@ ast_t* create_loop_ast(ast_t* body) {
 
   return (ast_t*) loop_ast;
 }
+void destroy_loop_ast(loop_ast_t* loop_ast) {
+  destroy_ast(loop_ast->body);
+  free(loop_ast);
+}

@@ -24,3 +24,7 @@ ast_t* create_var_ast(char* name) {
 
   return (ast_t*) var_ast;
 };
+void destroy_var_ast(var_ast_t* var_ast) {
+  free(var_ast->name);
+  free(var_ast);
+}

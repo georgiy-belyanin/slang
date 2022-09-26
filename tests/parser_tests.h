@@ -24,6 +24,8 @@ TEST(parser, func_decl) {
   assert(strcmp(arg_name_ast, "n") == 0);
   assert(strcmp(arg_ty_ast->name, "i32") == 0);
 
+  destroy_ast(ast);
+
   return 0;
 }
 TEST(parser, let) {
@@ -41,6 +43,8 @@ TEST(parser, let) {
   assert(strcmp(let_ast->name, "foo") == 0);
   assert(strcmp(ty_ast->name, "i32") == 0);
 
+  destroy_ast(ast);
+
   return 0;
 }
 TEST(parser, ret) {
@@ -54,6 +58,8 @@ TEST(parser, ret) {
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
 
   assert(ret_ast->type == AST_RET);
+
+  destroy_ast(ast);
 
   return 0;
 }
@@ -70,6 +76,8 @@ TEST(parser, num) {
 
   assert(num_ast->type == AST_NUM);
   assert(num_ast->val == 10);
+
+  destroy_ast(ast);
 
   return 0;
 }
@@ -89,6 +97,8 @@ TEST(parser, call) {
   assert(strcmp(call_ast->callee, "fib") == 0);
   assert(call_ast->arg_count == 1);
   assert(arg_ast->val == 1);
+
+  destroy_ast(ast);
 
   return 0;
 }
@@ -117,6 +127,8 @@ TEST(parser, bin) {
   assert(strcmp(var_ast1->name, "n") == 0);
   assert(num_ast2->type == AST_NUM);
   assert(num_ast2->val == 4);
+  
+  destroy_ast(ast);
 
   return 0;
 }

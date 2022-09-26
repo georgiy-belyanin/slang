@@ -10,3 +10,6 @@ ast_t* create_num_ast(int val) {
 
   return (ast_t*) num_ast;
 }
+void destroy_num_ast(num_ast_t* num_ast) {
+  free(num_ast);
+}

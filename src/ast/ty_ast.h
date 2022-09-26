@@ -10,3 +10,4 @@ typedef struct {
 } ty_ast_t;
 
 ast_t* create_ty_ast(char* name);
+void destroy_ty_ast(ty_ast_t* ty_ast);

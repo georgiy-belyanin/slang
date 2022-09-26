@@ -11,3 +11,4 @@ typedef struct {
 } body_ast_t;
 
 ast_t* create_body_ast(int stmt_count, ast_t** stmts);
+void destroy_body_ast(body_ast_t* body_ast);

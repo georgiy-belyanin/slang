@@ -10,3 +10,7 @@ ast_t* create_ret_ast(ast_t* val) {
 
   return (ast_t*) ret_ast;
 }
+void destroy_ret_ast(ret_ast_t* ret_ast) {
+  destroy_ast(ret_ast->val);
+  free(ret_ast);
+}

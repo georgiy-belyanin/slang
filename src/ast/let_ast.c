@@ -11,3 +11,8 @@ ast_t* create_let_ast(char* name, ast_t* ty) {
 
   return (ast_t*) let_ast;
 }
+void destroy_let_ast(let_ast_t* let_ast) {
+  free(let_ast->name);
+  destroy_ast(let_ast->ty);
+  free(let_ast);
+}

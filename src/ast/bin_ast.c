@@ -12,3 +12,9 @@ ast_t* create_bin_ast(op_t op, ast_t* lhs, ast_t* rhs) {
 
   return (ast_t*) bin_ast;
 }
+
+void destroy_bin_ast(bin_ast_t* bin_ast) {
+  destroy_ast(bin_ast->lhs);
+  destroy_ast(bin_ast->rhs);
+  free(bin_ast);
+}

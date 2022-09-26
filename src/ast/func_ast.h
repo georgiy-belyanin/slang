@@ -11,3 +11,4 @@ typedef struct {
 } func_ast_t;
 
 ast_t* create_func_ast(ast_t* decl, ast_t* body);
+void destroy_func_ast(func_ast_t* func_ast);

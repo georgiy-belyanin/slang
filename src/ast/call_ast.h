@@ -12,3 +12,4 @@ typedef struct {
 } call_ast_t;
 
 ast_t* create_call_ast(char* callee, int arg_count, ast_t** args);
+void destroy_call_ast(call_ast_t* call_ast);

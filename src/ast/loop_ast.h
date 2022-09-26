@@ -10,3 +10,4 @@ typedef struct {
 } loop_ast_t;
 
 ast_t* create_loop_ast(ast_t* body);
+void destroy_loop_ast(loop_ast_t* loop_ast);

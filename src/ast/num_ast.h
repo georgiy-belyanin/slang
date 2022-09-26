@@ -10,3 +10,4 @@ typedef struct {
 } num_ast_t;
 
 ast_t* create_num_ast(int val);
+void destroy_num_ast(num_ast_t* num_ast);

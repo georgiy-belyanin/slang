@@ -14,12 +14,21 @@
 static char* code = NULL;
 static char cur = ' ';
 static int pos = 0;
+static int row = 1;
+static int col = 0;
 
 static char* ident = NULL;
 static int number = 0;
 
 static void next() {
   cur = code[pos++];
+
+  if (cur == '\n') {
+    row++;
+    col = 0;
+  } else {
+    col++;
+  }
 }
 void skip_spaces() {
   while(isspace(cur))
@@ -140,6 +149,9 @@ token_t next_symbolic() {
 void seek_to_zero() {
   cur = ' ';
   pos = 0;
+
+  row = 1;
+  col = 0;
 }
 
 
@@ -164,4 +176,10 @@ char* lexer_get_ident() {
 }
 int lexer_get_number() {
   return number;
+}
+int lexer_get_row() {
+  return row;
+}
+int lexer_get_col() {
+  return col;
 }

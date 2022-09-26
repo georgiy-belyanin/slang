@@ -11,3 +11,4 @@ typedef struct {
 } let_ast_t;
 
 ast_t* create_let_ast(char* name, ast_t* ty);
+void destroy_let_ast(let_ast_t* let_ast);

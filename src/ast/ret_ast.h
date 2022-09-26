@@ -10,3 +10,4 @@ typedef struct {
 } ret_ast_t;
 
 ast_t* create_ret_ast(ast_t* val);
+void destroy_ret_ast(ret_ast_t* ret_ast);
