@@ -2,8 +2,7 @@
 
 #include "ast.h"
 #include "ast_type.h"
-
-typedef int op_t;
+#include "op.h"
 
 typedef struct {
   ast_type_t type;

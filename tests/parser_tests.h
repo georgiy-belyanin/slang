@@ -92,6 +92,34 @@ TEST(parser, call) {
 
   return 0;
 }
+TEST(parser, bin) {
+  lexer_set_code(
+    "func fib(n: i32): i32 { ret 2 - n * 4; }"
+  );
+
+  ast_t* ast = parser_parse();
+  func_ast_t* func_ast = (func_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) func_ast->body;
+  ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
+  bin_ast_t* bin_ast1 = (bin_ast_t*) ret_ast->val;
+  num_ast_t* num_ast1 = (num_ast_t*) bin_ast1->lhs;
+  bin_ast_t* bin_ast2 = (bin_ast_t*) bin_ast1->rhs;
+  var_ast_t* var_ast1 = (var_ast_t*) bin_ast2->lhs;
+  num_ast_t* num_ast2 = (num_ast_t*) bin_ast2->rhs;
+
+  assert(bin_ast1->type == AST_BIN);
+  assert(bin_ast1->op == OP_SUB);
+  assert(num_ast1->type == AST_NUM);
+  assert(num_ast1->val == 2);
+  assert(bin_ast2->type == AST_BIN);
+  assert(bin_ast2->op == OP_MUL);
+  assert(var_ast1->type == AST_VAR);
+  assert(strcmp(var_ast1->name, "n") == 0);
+  assert(num_ast2->type == AST_NUM);
+  assert(num_ast2->val == 4);
+
+  return 0;
+}
 
 TESTS(parser) {
   test_run(parser, func_decl);
@@ -99,5 +127,6 @@ TESTS(parser) {
   test_run(parser, ret);
   test_run(parser, num);
   test_run(parser, call);
+  test_run(parser, bin);
 }
 

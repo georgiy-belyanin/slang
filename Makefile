@@ -3,9 +3,9 @@ INCLUDE_PATH=$(INCLUDE_DIR)/
 LIB_DIR=lib
 LIB_PATH=$(LIB_DIR)/
 
-CC=clang 
+CC=gcc
 CFLAGS=-I$(INCLUDE_DIR)
-LD=clang
+LD=gcc
 LDFLAGS=
 
 SRC_DIR=src
