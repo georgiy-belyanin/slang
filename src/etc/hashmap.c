@@ -23,6 +23,8 @@ static pair_t* create_pair(char* key, void* val) {
   return pair;
 }
 static void destroy_pair(pair_t* pair) {
+  //free(pair->key);
+  //free(pair->val);
   free(pair);
 }
 

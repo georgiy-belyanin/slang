@@ -19,8 +19,12 @@ void codegen_init() {
   context = LLVMContextCreate();
   module = LLVMModuleCreateWithNameInContext("slang_module", context);
   builder = LLVMCreateBuilderInContext(context);
+
+  scope = 0;
+  scopes = calloc(sizeof(hashmap_t*), 10);
+  scopes[scope] = create_hashmap();
 }
-#include "../utils.h"
+
 unit_t* codegen(ast_t* ast) {
   if (ast->type == AST_BIN)
     return codegen_bin((bin_ast_t*) ast);
@@ -49,4 +53,24 @@ unit_t* codegen(ast_t* ast) {
   else if (ast->type == AST_WHILE)
     return codegen_while((while_ast_t*) ast);
   return NULL;
+}
+
+void scope_next() {
+  scope++;
+  scopes[scope] = create_hashmap();
+}
+void scope_prev() {
+  destroy_hashmap(scopes[scope]);
+  scope--;
+}
+unit_t* scope_get(char* name) {
+  for(int i = scope; i >= 0; i--) {
+    hashmap_t* hashmap = scopes[i];
+    if (hashmap_contains(hashmap, name))
+      return hashmap_get(hashmap, name);
+  }
+  return NULL;
+}
+void scope_set(char* name, void* val) {
+  hashmap_set(scopes[scope], name, val);
 }
