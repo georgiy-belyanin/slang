@@ -10,7 +10,6 @@
 #include "loop_ast.h"
 #include "num_ast.h"
 #include "ret_ast.h"
-#include "stmt_ast.h"
 #include "ty_ast.h"
 #include "var_ast.h"
 #include "while_ast.h"
@@ -36,8 +35,6 @@ void destroy_ast(ast_t* ast) {
     destroy_num_ast((num_ast_t*) ast);
   else if (ast->type == AST_WHILE)
     destroy_while_ast((while_ast_t*) ast);
-  // else if (ast->type == AST_STMT)
-  //   destroy_ret_ast(ast);
   else if (ast->type == AST_RET)
     destroy_ret_ast((ret_ast_t*) ast);
   else if (ast->type == AST_TY)

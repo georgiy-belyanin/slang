@@ -13,7 +13,6 @@ typedef enum {
   AST_IF,
   AST_LOOP,
   AST_WHILE,
-  AST_STMT,
   AST_BODY,
 
   AST_FUNC_DECL,
