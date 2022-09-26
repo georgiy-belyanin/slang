@@ -10,6 +10,8 @@
 #define KEYWORD_RET "ret"
 #define KEYWORD_EXT "ext"
 #define KEYWORD_IF "if"
+#define KEYWORD_WHILE "while"
+#define KEYWORD_LOOP "loop"
 
 static char* code = NULL;
 static char cur = ' ';
@@ -53,6 +55,10 @@ token_t next_word() {
     return TOKEN_EXT;
   else if (strcmp(word, KEYWORD_IF) == 0) 
     return TOKEN_IF;
+  else if (strcmp(word, KEYWORD_WHILE) == 0) 
+    return TOKEN_WHILE;
+  else if (strcmp(word, KEYWORD_LOOP) == 0) 
+    return TOKEN_LOOP;
   else {
     ident = word;
     return TOKEN_IDENT;

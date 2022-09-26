@@ -127,11 +127,97 @@ TEST(parser, bin) {
   assert(strcmp(var_ast1->name, "n") == 0);
   assert(num_ast2->type == AST_NUM);
   assert(num_ast2->val == 4);
+
+  destroy_ast(ast);
+
+  return 0;
+}
+TEST(parser, body) {
+  lexer_set_code(
+    "func fib(n: i32): i32 { let a: i32; a = 10; ret a; }"
+  );
+
+  ast_t* ast = parser_parse();
+  func_ast_t* func_ast = (func_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) func_ast->body;
+  let_ast_t* let_ast = (let_ast_t*) body_ast->stmts[0];
+  bin_ast_t* bin_ast = (bin_ast_t*) body_ast->stmts[1];
+  ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[2];
+
+  assert(let_ast->type == AST_LET);
+  assert(bin_ast->type == AST_BIN);
+  assert(ret_ast->type == AST_RET);
   
   destroy_ast(ast);
 
   return 0;
 }
+TEST(parser, if) {
+  lexer_set_code(
+    "func fib(n: i32): i32 { if n > 10 { ret 10; } }"
+  );
+
+  ast_t* ast = parser_parse();
+  func_ast_t* func_ast = (func_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) func_ast->body;
+  if_ast_t* if_ast = (if_ast_t*) body_ast->stmts[0];
+  bin_ast_t* bin_ast = (bin_ast_t*) if_ast->cond;
+  body_ast_t* body_ast1 = (body_ast_t*) if_ast->body;
+  ret_ast_t* ret_ast = (ret_ast_t*) body_ast1->stmts[0];
+
+  assert(if_ast->type == AST_IF);
+  assert(bin_ast->type == AST_BIN);
+  assert(bin_ast->op == OP_GRTR);
+  assert(ret_ast->type == AST_RET);
+  
+  destroy_ast(ast);
+
+  return 0;
+}
+TEST(parser, while) {
+  lexer_set_code(
+    "func fib(n: i32): i32 { while n > 10 { ret 10; } }"
+  );
+
+  ast_t* ast = parser_parse();
+  func_ast_t* func_ast = (func_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) func_ast->body;
+  while_ast_t* while_ast = (while_ast_t*) body_ast->stmts[0];
+  bin_ast_t* bin_ast = (bin_ast_t*) while_ast->cond;
+  body_ast_t* body_ast1 = (body_ast_t*) while_ast->body;
+  ret_ast_t* ret_ast = (ret_ast_t*) body_ast1->stmts[0];
+
+  assert(while_ast->type == AST_WHILE);
+  assert(bin_ast->type == AST_BIN);
+  assert(bin_ast->op == OP_GRTR);
+  assert(ret_ast->type == AST_RET);
+  
+  destroy_ast(ast);
+
+  return 0;
+}
+TEST(parser, loop) {
+  lexer_set_code(
+    "func fib(n: i32): i32 { loop { ret 10; } }"
+  );
+
+  ast_t* ast = parser_parse();
+  func_ast_t* func_ast = (func_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) func_ast->body;
+  loop_ast_t* loop_ast = (loop_ast_t*) body_ast->stmts[0];
+  body_ast_t* body_ast1 = (body_ast_t*) loop_ast->body;
+  ret_ast_t* ret_ast = (ret_ast_t*) body_ast1->stmts[0];
+
+  assert(loop_ast->type == AST_LOOP);
+  assert(ret_ast->type == AST_RET);
+  
+  destroy_ast(ast);
+
+  return 0;
+}
+
+
+
 
 TESTS(parser) {
   test_run(parser, func_decl);
@@ -140,5 +226,9 @@ TESTS(parser) {
   test_run(parser, num);
   test_run(parser, call);
   test_run(parser, bin);
+  test_run(parser, body);
+  test_run(parser, if);
+  test_run(parser, while);
+  test_run(parser, loop);
 }
 

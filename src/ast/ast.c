@@ -34,8 +34,8 @@ void destroy_ast(ast_t* ast) {
     destroy_loop_ast((loop_ast_t*) ast);
   else if (ast->type == AST_NUM)
     destroy_num_ast((num_ast_t*) ast);
-  // else if (ast->type == AST_WHILE)
-  //   destroy_while_ast(ast);
+  else if (ast->type == AST_WHILE)
+    destroy_while_ast((while_ast_t*) ast);
   // else if (ast->type == AST_STMT)
   //   destroy_ret_ast(ast);
   else if (ast->type == AST_RET)

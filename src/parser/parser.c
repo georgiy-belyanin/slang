@@ -183,6 +183,17 @@ static ast_t* parse_if() {
   ast_t* body = parse_body();
   return create_if_ast(cond, body);
 }
+static ast_t* parse_while() {
+  eat(TOKEN_WHILE);
+  ast_t* cond = parse_expr();
+  ast_t* body = parse_body();
+  return create_while_ast(cond, body);
+}
+static ast_t* parse_loop() {
+  eat(TOKEN_LOOP);
+  ast_t* body = parse_body();
+  return create_loop_ast(body);
+}
 static ast_t* parse_let() {
   eat(TOKEN_LET);
   char* name = eat_ident();
@@ -204,6 +215,10 @@ static ast_t* parse_stmt() {
     val = parse_let();
   else if (cur == TOKEN_IF)
     return parse_if();
+  else if (cur == TOKEN_WHILE)
+    return parse_while();
+  else if (cur == TOKEN_LOOP)
+    return parse_loop();
   else 
     val = parse_expr();
 
