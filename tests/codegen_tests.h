@@ -10,11 +10,10 @@
 
 TEST(codegen, testy) {
   lexer_set_code(
-    "func fib(n: i32): i32 { while n ret 3; }"
+    "func fib(n: i32): i32 { fib(1); }"
   );
   codegen_init();
   codegen(parser_parse());
-  //LLVMDumpModule(module);
 
   return 0;
 }

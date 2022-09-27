@@ -4,9 +4,9 @@ LIB_DIR=lib
 LIB_PATH=$(LIB_DIR)/
 
 CC=gcc
-CFLAGS=-I$(INCLUDE_DIR) $(shell llvm-config --cflags)
+CFLAGS=-I$(INCLUDE_DIR) $(shell llvm-config --cflags) -g -O0
 LD=gcc
-LDFLAGS=$(shell llvm-config --ldflags --libs)
+LDFLAGS=$(shell llvm-config --ldflags --libs) -g -O0
 
 SRC_DIR=src
 SRC_PATH=$(SRC_DIR)/

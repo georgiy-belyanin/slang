@@ -232,22 +232,29 @@ static ast_t* parse_stmt() {
   eat(TOKEN_SEMI);
   return val;
 }
+static ast_t* parse_small_body() {
+
+  ast_t** stmts = calloc(sizeof(ast_t*), 1);
+  stmts[0] = parse_stmt();
+  return create_body_ast(1, stmts);
+}
+static ast_t* parse_large_body() {
+  ast_t** stmts = calloc(sizeof(ast_t*), 100);
+  int stmt_count = 0;
+
+  eat(TOKEN_LBLOCK);
+  while(cur != TOKEN_RBLOCK) {
+    stmts[stmt_count++] = parse_stmt();
+  }
+  eat(TOKEN_RBLOCK);
+  return create_body_ast(stmt_count, stmts);
+}
 static ast_t* parse_body() {
   // TODO: Limitations.
   if(cur == TOKEN_LBLOCK) {
-    ast_t** stmts = calloc(sizeof(ast_t*), 100);
-    int stmt_count = 0;
-
-    eat(TOKEN_LBLOCK);
-    while(cur != TOKEN_RBLOCK) {
-      stmts[stmt_count++] = parse_stmt();
-    }
-    eat(TOKEN_RBLOCK);
-    return create_body_ast(stmt_count, stmts);
+    return parse_large_body();
   } else {
-    ast_t** stmts = calloc(sizeof(ast_t*), 1);
-    stmts[0] = parse_stmt();
-    return create_body_ast(1, stmts);
+    return parse_small_body();
   }
 }
 

@@ -6,7 +6,8 @@
 #include "../utils.h"
 unit_t* codegen_var(var_ast_t* var_ast) {
   char* name = var_ast->name;
-  unit_t* alloca = scope_get(name);
-  unit_t* ty = LLVMGetAllocatedType(alloca);
+  val_t* val = scope_get(name);
+  unit_t* alloca = val->val;
+  unit_t* ty = val->ty;
   return LLVMBuildLoad2(builder, ty, alloca, "val");
 }

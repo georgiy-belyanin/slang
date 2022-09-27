@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include "../ast.h"
 #include "../etc.h"
+#include "val.h" 
 #include "unit.h"
 
 #define VAR_LEVELS 10
@@ -24,5 +25,5 @@ unit_t* codegen(ast_t* ast);
 
 void scope_next();
 void scope_prev();
-unit_t* scope_get(char* name);
+val_t* scope_get(char* name);
 void scope_set(char* name, void* val);

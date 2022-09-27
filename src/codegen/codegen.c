@@ -65,7 +65,7 @@ void scope_prev() {
   destroy_hashmap(scopes[scope]);
   scope--;
 }
-unit_t* scope_get(char* name) {
+val_t* scope_get(char* name) {
   for(int i = scope; i >= 0; i--) {
     hashmap_t* hashmap = scopes[i];
     if (hashmap_contains(hashmap, name))

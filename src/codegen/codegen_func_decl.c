@@ -5,7 +5,6 @@
 
 #include "../utils.h"
 unit_t* codegen_func_decl(func_decl_ast_t* func_decl_ast) {
-  scope_next();
 
   char* name = func_decl_ast->name;
   int arg_count = func_decl_ast->arg_count;
@@ -19,6 +18,8 @@ unit_t* codegen_func_decl(func_decl_ast_t* func_decl_ast) {
   unit_t* func = LLVMAddFunction(module, name, ty);
   unit_t* entry = LLVMAppendBasicBlockInContext(context, func, "entry");
   LLVMPositionBuilderAtEnd(builder, entry);
+
+  scope_set(name, create_val(func, ty));
 
   for (int i = 0; i < arg_count; i++) {
     unit_t* arg_alloca = LLVMBuildAlloca(builder, arg_tys[i], arg_names[i]);
