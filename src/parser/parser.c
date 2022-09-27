@@ -180,8 +180,15 @@ static ast_t* parse_body();
 static ast_t* parse_if() {
   eat(TOKEN_IF);
   ast_t* cond = parse_expr();
-  ast_t* body = parse_body();
-  return create_if_ast(cond, body);
+  ast_t* then = parse_body();
+  ast_t* ow = NULL;
+
+  if (cur == TOKEN_ELSE) {
+    eat(TOKEN_ELSE);
+    ow = parse_body();
+  }
+
+  return create_if_ast(cond, then, ow);
 }
 static ast_t* parse_while() {
   eat(TOKEN_WHILE);
@@ -227,16 +234,21 @@ static ast_t* parse_stmt() {
 }
 static ast_t* parse_body() {
   // TODO: Limitations.
-  ast_t** stmts = calloc(sizeof(ast_t*), 100);
-  int stmt_count = 0;
+  if(cur == TOKEN_LBLOCK) {
+    ast_t** stmts = calloc(sizeof(ast_t*), 100);
+    int stmt_count = 0;
 
-  eat(TOKEN_LBLOCK);
-  while(cur != TOKEN_RBLOCK) {
-    stmts[stmt_count++] = parse_stmt();
+    eat(TOKEN_LBLOCK);
+    while(cur != TOKEN_RBLOCK) {
+      stmts[stmt_count++] = parse_stmt();
+    }
+    eat(TOKEN_RBLOCK);
+    return create_body_ast(stmt_count, stmts);
+  } else {
+    ast_t** stmts = calloc(sizeof(ast_t*), 1);
+    stmts[0] = parse_stmt();
+    return create_body_ast(1, stmts);
   }
-  eat(TOKEN_RBLOCK);
-
-  return create_body_ast(stmt_count, stmts);
 }
 
 

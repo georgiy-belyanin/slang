@@ -162,8 +162,8 @@ TEST(parser, if) {
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   if_ast_t* if_ast = (if_ast_t*) body_ast->stmts[0];
   bin_ast_t* bin_ast = (bin_ast_t*) if_ast->cond;
-  body_ast_t* body_ast1 = (body_ast_t*) if_ast->body;
-  ret_ast_t* ret_ast = (ret_ast_t*) body_ast1->stmts[0];
+  body_ast_t* then_ast = (body_ast_t*) if_ast->then;
+  ret_ast_t* ret_ast = (ret_ast_t*) then_ast->stmts[0];
 
   assert(if_ast->type == AST_IF);
   assert(bin_ast->type == AST_BIN);

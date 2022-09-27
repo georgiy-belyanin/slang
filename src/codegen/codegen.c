@@ -26,6 +26,8 @@ void codegen_init() {
 }
 
 unit_t* codegen(ast_t* ast) {
+  if (ast == NULL)
+    return NULL;
   if (ast->type == AST_BIN)
     return codegen_bin((bin_ast_t*) ast);
   else if (ast->type == AST_BODY)

@@ -1,5 +1,6 @@
 #include "ast.h"
 
+#include <stdlib.h>
 #include "bin_ast.h"
 #include "body_ast.h"
 #include "call_ast.h"
@@ -15,6 +16,8 @@
 #include "while_ast.h"
 
 void destroy_ast(ast_t* ast) {
+  if (ast == NULL)
+    return;
   if (ast->type == AST_BIN)
     destroy_bin_ast((bin_ast_t*) ast);
   else if (ast->type == AST_BODY)

@@ -9,6 +9,7 @@
   TOKEN(TOKEN_RET, "ret")\
   TOKEN(TOKEN_EXT, "ext")\
   TOKEN(TOKEN_IF, "if")\
+  TOKEN(TOKEN_ELSE, "else")\
   TOKEN(TOKEN_WHILE, "while")\
   TOKEN(TOKEN_LOOP, "loop")\
   \

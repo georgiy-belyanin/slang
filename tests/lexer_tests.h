@@ -30,6 +30,11 @@ TEST(lexer, if) {
   assert(lexer_next_token() == TOKEN_IF);
   return 0;
 }
+TEST(lexer, else) {
+  lexer_set_code("else");
+  assert(lexer_next_token() == TOKEN_ELSE);
+  return 0;
+}
 TEST(lexer, while) {
   lexer_set_code("while");
   assert(lexer_next_token() == TOKEN_WHILE);
@@ -250,6 +255,7 @@ TESTS(lexer) {
   test_run(lexer, ret);
   test_run(lexer, ext);
   test_run(lexer, if);
+  test_run(lexer, else);
   test_run(lexer, while);
   test_run(lexer, loop);
 

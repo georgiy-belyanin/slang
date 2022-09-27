@@ -10,7 +10,7 @@
 
 TEST(codegen, testy) {
   lexer_set_code(
-    "func fib(n: i32): i32 { let a: i32; ret a; }"
+    "func fib(n: i32): i32 { while n ret 3; }"
   );
   codegen_init();
   codegen(parser_parse());
