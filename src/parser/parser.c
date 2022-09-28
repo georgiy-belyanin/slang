@@ -47,7 +47,7 @@ static int eat_number() {
   return number;
 }
 
-static op_t op_from_token(token_t token) {
+static op_t bin_op_from_token(token_t token) {
   if (token == TOKEN_ASSIGN)
     return OP_ASSIGN;
 
@@ -86,6 +86,16 @@ static op_t op_from_token(token_t token) {
     return OP_BWOR;
   return OP_UNKNOWN;
 }
+static op_t un_op_from_token(token_t token) {
+  if (token == TOKEN_SUB)
+    return OP_MINUS;
+  else if (token == TOKEN_NOT)
+    return OP_NOT;
+  return OP_UNKNOWN;
+}
+static int token_is_un_op(token_t token) {
+  return token == TOKEN_SUB || token == TOKEN_NOT;
+}
 static int op_get_prec(op_t op) {
   if (op == OP_ASSIGN) 
     return 10;
@@ -108,6 +118,7 @@ static int op_get_prec(op_t op) {
   else 
     return -1;
 }
+
 
 static ast_t* parse_expr();
 static ast_t* parse_ty() {
@@ -153,15 +164,23 @@ static ast_t* parse_primary() {
     return parse_number();
   else if (cur == TOKEN_LPAREN) 
     return parse_paren();
+  // else if (token_is_un_op(cur)) 
+  //   return parse_un_op();
   else 
     return NULL;
 }
+// static ast_t* parse_un() {
+//   op_t op = un_op_from_token(cur);
+//   next();
+//   ast_t* val = parse_expr();
+//   return create_un(op, val);
+// }
 static ast_t* parse_bin_rhs(ast_t* lhs, int min_prec) {
-  while (op_get_prec(op_from_token(cur)) >= min_prec) {
-    op_t op = op_from_token(cur);
+  while (op_get_prec(bin_op_from_token(cur)) >= min_prec) {
+    op_t op = bin_op_from_token(cur);
     next();
     ast_t* rhs = parse_primary();
-    op_t op1 = op_from_token(cur);
+    op_t op1 = bin_op_from_token(cur);
 
     if (op_get_prec(op1) > op_get_prec(op)) {
       rhs = parse_bin_rhs(rhs, op_get_prec(op) + 1);
@@ -301,10 +320,10 @@ ast_t* parser_parse() {
   if (cur == TOKEN_UNKNOWN)
     next();
 
-  if (cur == TOKEN_FUNC) {
+  if (cur == TOKEN_FUNC)
     return parse_func();
-  }
-
+  else if (cur == TOKEN_EOF) 
+    return NULL;
   return NULL;
 }
 

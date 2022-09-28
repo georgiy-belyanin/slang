@@ -12,7 +12,7 @@ unit_t* codegen_while(while_ast_t* while_ast) {
   scope_next();
 
   LLVMPositionBuilderAtEnd(builder, loop);
-  unit_t* cond = codegen(while_ast->cond);
+  unit_t* cond = ((rval_t*) codegen(while_ast->cond))->val;
   LLVMBuildCondBr(builder, cond, then, out);
 
   LLVMPositionBuilderAtEnd(builder, then);

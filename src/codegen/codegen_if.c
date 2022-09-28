@@ -11,7 +11,7 @@ unit_t* codegen_if(if_ast_t* if_ast) {
 
   scope_next();
 
-  unit_t* cond = codegen(if_ast->cond);
+  unit_t* cond = ((rval_t*) codegen(if_ast->cond))->val;
   LLVMBuildCondBr(builder, cond, then, ow);
 
   LLVMPositionBuilderAtEnd(builder, then);

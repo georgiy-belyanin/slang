@@ -13,10 +13,9 @@ unit_t* codegen_call(call_ast_t* call_ast) {
   unit_t** args = calloc(sizeof(unit_t*), call_ast->arg_count);
 
   for(int i = 0; i < arg_count; i++) 
-    args[i] = codegen(call_ast->args[i]);
+    args[i] = ((rval_t*) codegen(call_ast->args[i]))->val;
 
-
-  return LLVMBuildCall2(builder, ty, func, (LLVMValueRef*) args, arg_count, "call_res");
+  return create_rval(LLVMBuildCall2(builder, ty, func, (LLVMValueRef*) args, arg_count, "call_res"), LLVMGetReturnType(ty));
 
   // return LLVMBuildCall2(builder, func, (LLVMValueRef*) args, arg_count, "call_res");
 }

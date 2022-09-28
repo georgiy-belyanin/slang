@@ -4,5 +4,6 @@
 #include "codegen.h"
 
 unit_t* codegen_num(num_ast_t* num_ast) {
-  return LLVMConstInt(LLVMInt32TypeInContext(context), num_ast->val, 0);
+  unit_t* ty = tys_get("i32");
+  return create_rval(LLVMConstInt(ty, num_ast->val, 0), ty);
 }

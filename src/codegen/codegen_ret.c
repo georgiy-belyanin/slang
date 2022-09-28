@@ -2,8 +2,10 @@
 
 #include <llvm-c/Core.h>
 #include "codegen.h"
+#include "../utils.h"
 
 unit_t* codegen_ret(ret_ast_t* ret_ast) {
-  LLVMBuildRet(builder, codegen(ret_ast->val));
+  rval_t* rval = (rval_t*) codegen(ret_ast->val);
+  LLVMBuildRet(builder, rval->val);
   return NULL;
 }

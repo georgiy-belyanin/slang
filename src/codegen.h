@@ -12,4 +12,7 @@
 #include "codegen/codegen_ty.h"
 #include "codegen/codegen_var.h"
 #include "codegen/codegen_while.h"
+#include "codegen/in.h"
+#include "codegen/out.h"
 #include "codegen/unit.h"
+#include "codegen/val.h"

@@ -17,10 +17,12 @@ typedef enum {
   OP_LE,
   OP_GE,
 
-  OP_NOT,
   OP_AND,
   OP_OR,
 
   OP_BWAND,
-  OP_BWOR
+  OP_BWOR,
+
+  OP_MINUS,
+  OP_NOT,
 } op_t;

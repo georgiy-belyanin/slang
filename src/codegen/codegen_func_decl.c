@@ -19,13 +19,14 @@ unit_t* codegen_func_decl(func_decl_ast_t* func_decl_ast) {
   unit_t* entry = LLVMAppendBasicBlockInContext(context, func, "entry");
   LLVMPositionBuilderAtEnd(builder, entry);
 
-  scope_set(name, create_val(func, ty));
+  scope_set(name, create_rval(func, ty));
 
   for (int i = 0; i < arg_count; i++) {
     unit_t* arg_alloca = LLVMBuildAlloca(builder, arg_tys[i], arg_names[i]);
-    scope_set(arg_names[i], arg_alloca);
-    unit_t* arg_val = LLVMGetParam(func, i);
-    LLVMBuildStore(builder, arg_val, arg_alloca);
+    unit_t* arg = LLVMGetParam(func, i);
+
+    LLVMBuildStore(builder, arg, arg_alloca);
+    scope_set(arg_names[i], create_rval(arg_alloca, arg_tys[i]));
   }
 
   return NULL;
