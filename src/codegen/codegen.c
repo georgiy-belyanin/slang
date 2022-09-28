@@ -1,7 +1,6 @@
 #include "codegen.h"
 
 #include <llvm-c/Core.h>
-#include "scope.h"
 #include "codegen_bin.h"
 #include "codegen_body.h"
 #include "codegen_call.h"
@@ -23,7 +22,6 @@ void codegen_init() {
 
   scope_init();
   tys_init();
-
 }
 
 unit_t* codegen(ast_t* ast) {

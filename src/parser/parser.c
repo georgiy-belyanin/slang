@@ -29,8 +29,11 @@ static void next() {
 static char* get_ident() {
   return lexer_get_ident();
 }
-static int get_number() {
-  return lexer_get_number();
+static int get_integer() {
+  return lexer_get_integer();
+}
+static double get_decimal() {
+  return lexer_get_decimal();
 }
 static void eat(token_t token) {
   expect(token);
@@ -41,10 +44,15 @@ static char* eat_ident() {
   eat(TOKEN_IDENT);
   return ident;
 }
-static int eat_number() {
-  int number = get_number();
-  eat(TOKEN_NUMBER);
-  return number;
+static int eat_integer() {
+  int integer = get_integer();
+  eat(TOKEN_INTEGER);
+  return integer;
+}
+static double eat_decimal() {
+  int decimal = get_decimal();
+  eat(TOKEN_DECIMAL);
+  return decimal;
 }
 
 static op_t bin_op_from_token(token_t token) {
@@ -124,12 +132,13 @@ static ast_t* parse_expr();
 static ast_t* parse_ty() {
   return create_ty_ast(eat_ident());
 }
-static ast_t* parse_number() {
-  return create_num_ast(eat_number());
-}
-/*static ast_t* parse_call() {
+static ast_t* parse_decimal() {
+  //return create_decimal_ast(eat_decimal());
   return NULL;
-}*/
+}
+static ast_t* parse_integer() {
+  return create_num_ast(eat_integer());
+}
 static ast_t* parse_ident() {
   char* name = eat_ident();
   if (cur == TOKEN_LPAREN) {
@@ -160,8 +169,10 @@ static ast_t* parse_paren() {
 static ast_t* parse_primary() {
   if (cur == TOKEN_IDENT)
     return parse_ident();
-  else if (cur == TOKEN_NUMBER)
-    return parse_number();
+  else if (cur == TOKEN_DECIMAL)
+    return parse_decimal();
+  else if (cur == TOKEN_INTEGER)
+    return parse_integer();
   else if (cur == TOKEN_LPAREN) 
     return parse_paren();
   // else if (token_is_un_op(cur)) 

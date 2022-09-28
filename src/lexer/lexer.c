@@ -21,7 +21,8 @@ static int row = 1;
 static int col = 0;
 
 static char* ident = NULL;
-static int number = 0;
+static int integer = 0;
+static double decimal = 0;
 
 static void next() {
   cur = code[pos++];
@@ -69,12 +70,27 @@ token_t next_word() {
 }
 
 token_t next_number() {
-  number = 0;
+  integer = 0;
   while(isdigit(cur)) {
-    number = number * 10 + (cur - '0');
+    integer = integer * 10 + (cur - '0');
     next();
   }
-  return TOKEN_NUMBER;
+  if (cur != '.') {
+    return TOKEN_INTEGER;
+  }
+  next();
+
+  decimal = integer;
+  double decimal_part = 0;
+  double decimal_div = 1;
+
+  while(isdigit(cur)) {
+    decimal_part = decimal_part * 10 + (cur - '0');
+    decimal_div *= 10;
+    next();
+  }
+  decimal = decimal + (decimal_part / decimal_div);
+  return TOKEN_DECIMAL;
 }
 
 token_t next_symbolic() {
@@ -183,8 +199,11 @@ token_t lexer_next_token() {
 char* lexer_get_ident() {
   return ident;
 }
-int lexer_get_number() {
-  return number;
+int lexer_get_integer() {
+  return integer;
+}
+double lexer_get_decimal() {
+  return decimal;
 }
 int lexer_get_row() {
   return row;

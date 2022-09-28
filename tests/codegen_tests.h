@@ -15,7 +15,6 @@ TEST(codegen, testy) {
   );
   codegen_init();
   codegen(parser_parse());
-  LLVMDumpModule(module);
 
   return 0;
 }
