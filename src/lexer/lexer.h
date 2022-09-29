@@ -6,5 +6,5 @@ void lexer_set_code(char* code);
 token_t lexer_next_token();
 
 char* lexer_get_ident();
-int lexer_get_integer();
-double lexer_get_decimal();
+int lexer_get_int();
+double lexer_get_real();

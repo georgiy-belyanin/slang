@@ -7,9 +7,10 @@
 #include "func_ast.h"
 #include "func_decl_ast.h"
 #include "if_ast.h"
+#include "int_ast.h"
 #include "let_ast.h"
 #include "loop_ast.h"
-#include "num_ast.h"
+#include "real_ast.h"
 #include "ret_ast.h"
 #include "ty_ast.h"
 #include "var_ast.h"
@@ -30,14 +31,16 @@ void destroy_ast(ast_t* ast) {
     destroy_func_decl_ast((func_decl_ast_t*) ast);
   else if (ast->type == AST_IF)
     destroy_if_ast((if_ast_t*) ast);
+  else if (ast->type == AST_INT)
+    destroy_int_ast((int_ast_t*) ast);
   else if (ast->type == AST_LET)
     destroy_let_ast((let_ast_t*) ast);
   else if (ast->type == AST_LOOP)
     destroy_loop_ast((loop_ast_t*) ast);
-  else if (ast->type == AST_NUM)
-    destroy_num_ast((num_ast_t*) ast);
   else if (ast->type == AST_WHILE)
     destroy_while_ast((while_ast_t*) ast);
+  else if (ast->type == AST_REAL)
+    destroy_real_ast((real_ast_t*) ast);
   else if (ast->type == AST_RET)
     destroy_ret_ast((ret_ast_t*) ast);
   else if (ast->type == AST_TY)

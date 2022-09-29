@@ -7,7 +7,7 @@ typedef struct {
   ast_type_t type;
 
   int val;
-} num_ast_t;
+} int_ast_t;
 
-ast_t* create_num_ast(int val);
-void destroy_num_ast(num_ast_t* num_ast);
+ast_t* create_int_ast(int val);
+void destroy_int_ast(int_ast_t* int_ast);

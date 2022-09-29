@@ -45,5 +45,5 @@
   TOKEN(TOKEN_BWAND, "&")\
   \
   TOKEN(TOKEN_IDENT, "[identifier]")\
-  TOKEN(TOKEN_INTEGER, "[integer]")\
-  TOKEN(TOKEN_DECIMAL, "[float]")
+  TOKEN(TOKEN_INT, "[integer]")\
+  TOKEN(TOKEN_REAL, "[real]")

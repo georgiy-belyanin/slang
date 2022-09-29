@@ -17,7 +17,7 @@ to build the compiler, or
 ```
 make tests
 ```
-to build tests.
+to build the tests.
 
 ## Usage
 ```

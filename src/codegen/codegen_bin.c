@@ -10,7 +10,16 @@
 //   return LLVMBuildStore(builder, lhs, scope_get(((var_ast_t*) bin_ast->lhs)->name)->val);
 // };
 
+static rval_t* build_assign(rval_t* lhs, rval_t* rhs) {
+  //if (LLVMGetTypeKind(lhs->ty) == LLVMIntegerTypeKind)
+  if (!rval_is_lval(lhs))
+    return NULL;
+  lval_t* lval = (lval_t*) lhs;
+  unit_t* val = LLVMBuildStore(builder, rhs->val, lval->ptr);
+  return create_rval(val, lhs->ty);
+}
 static rval_t* build_add(rval_t* lhs, rval_t* rhs) {
+  //if (LLVMGetTypeKind(lhs->ty) == LLVMIntegerTypeKind)
   unit_t* val = LLVMBuildAdd(builder, lhs->val, rhs->val, "add_res");
   return create_rval(val, lhs->ty);
 }
@@ -60,8 +69,7 @@ unit_t* codegen_bin(bin_ast_t* bin_ast) {
   unit_t* lhs = (rval_t*) codegen(bin_ast->lhs);
   unit_t* rhs = (rval_t*) codegen(bin_ast->rhs);
   if (bin_ast->op == OP_ASSIGN) {
-    //LLVMBuildStore(builder, lhs, scope_get(((var_ast_t*) bin_ast->lhs)->name)->val);
-    return NULL;
+    return build_assign(lhs, rhs);
   } else if (bin_ast->op == OP_ADD)
     return build_add(lhs, rhs);
   else if (bin_ast->op == OP_SUB)

@@ -7,9 +7,10 @@
 #include "codegen_func_decl.h"
 #include "codegen_func.h"
 #include "codegen_if.h"
+#include "codegen_int.h"
 #include "codegen_let.h"
 #include "codegen_loop.h"
-#include "codegen_num.h"
+#include "codegen_real.h"
 #include "codegen_ret.h"
 #include "codegen_ty.h"
 #include "codegen_var.h"
@@ -39,12 +40,14 @@ unit_t* codegen(ast_t* ast) {
     return codegen_func((func_ast_t*) ast);
   else if (ast->type == AST_IF)
     return codegen_if((if_ast_t*) ast);
+  else if (ast->type == AST_INT)
+    return codegen_int((int_ast_t*) ast);
   else if (ast->type == AST_LET)
     return codegen_let((let_ast_t*) ast);
   else if (ast->type == AST_LOOP)
     return codegen_loop((loop_ast_t*) ast);
-  else if (ast->type == AST_NUM)
-    return codegen_num((num_ast_t*) ast);
+  else if (ast->type == AST_REAL)
+    return codegen_real((real_ast_t*) ast);
   else if (ast->type == AST_RET)
     return codegen_ret((ret_ast_t*) ast);
   else if (ast->type == AST_TY)

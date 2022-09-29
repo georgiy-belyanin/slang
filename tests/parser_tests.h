@@ -63,7 +63,7 @@ TEST(parser, ret) {
 
   return 0;
 }
-TEST(parser, num) {
+TEST(parser, int) {
   lexer_set_code(
     "func fib(n: i32): i32 { ret 10; }"
   );
@@ -72,10 +72,28 @@ TEST(parser, num) {
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
-  num_ast_t* num_ast = (num_ast_t*) ret_ast->val;
+  int_ast_t* int_ast = (int_ast_t*) ret_ast->val;
 
-  assert(num_ast->type == AST_NUM);
-  assert(num_ast->val == 10);
+  assert(int_ast->type == AST_INT);
+  assert(int_ast->val == 10);
+
+  destroy_ast(ast);
+
+  return 0;
+}
+TEST(parser, real) {
+  lexer_set_code(
+    "func fib(n: i32): i32 { ret 10.0; }"
+  );
+
+  ast_t* ast = parser_parse();
+  func_ast_t* func_ast = (func_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) func_ast->body;
+  ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
+  real_ast_t* real_ast = (real_ast_t*) ret_ast->val;
+
+  assert(real_ast->type == AST_REAL);
+  assert(real_ast->val == 10.0);
 
   destroy_ast(ast);
 
@@ -91,7 +109,7 @@ TEST(parser, call) {
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
   call_ast_t* call_ast = (call_ast_t*) ret_ast->val;
-  num_ast_t* arg_ast = (num_ast_t*) call_ast->args[0];
+  int_ast_t* arg_ast = (int_ast_t*) call_ast->args[0];
 
   assert(call_ast->type == AST_CALL);
   assert(strcmp(call_ast->callee, "fib") == 0);
@@ -112,21 +130,21 @@ TEST(parser, bin) {
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
   bin_ast_t* bin_ast1 = (bin_ast_t*) ret_ast->val;
-  num_ast_t* num_ast1 = (num_ast_t*) bin_ast1->lhs;
+  int_ast_t* int_ast1 = (int_ast_t*) bin_ast1->lhs;
   bin_ast_t* bin_ast2 = (bin_ast_t*) bin_ast1->rhs;
   var_ast_t* var_ast1 = (var_ast_t*) bin_ast2->lhs;
-  num_ast_t* num_ast2 = (num_ast_t*) bin_ast2->rhs;
+  int_ast_t* int_ast2 = (int_ast_t*) bin_ast2->rhs;
 
   assert(bin_ast1->type == AST_BIN);
   assert(bin_ast1->op == OP_SUB);
-  assert(num_ast1->type == AST_NUM);
-  assert(num_ast1->val == 2);
+  assert(int_ast1->type == AST_INT);
+  assert(int_ast1->val == 2);
   assert(bin_ast2->type == AST_BIN);
   assert(bin_ast2->op == OP_MUL);
   assert(var_ast1->type == AST_VAR);
   assert(strcmp(var_ast1->name, "n") == 0);
-  assert(num_ast2->type == AST_NUM);
-  assert(num_ast2->val == 4);
+  assert(int_ast2->type == AST_INT);
+  assert(int_ast2->val == 4);
 
   destroy_ast(ast);
 
@@ -223,7 +241,8 @@ TESTS(parser) {
   test_run(parser, func_decl);
   test_run(parser, let);
   test_run(parser, ret);
-  test_run(parser, num);
+  test_run(parser, int);
+  test_run(parser, real);
   test_run(parser, call);
   test_run(parser, bin);
   test_run(parser, body);

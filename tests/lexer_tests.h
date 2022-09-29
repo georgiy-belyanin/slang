@@ -189,21 +189,21 @@ TEST(lexer, ident) {
   assert(strcmp(lexer_get_ident(), "bar") == 0);
   return 0;
 }
-TEST(lexer, integer) {
+TEST(lexer, int) {
   lexer_set_code("23 46");
-  assert(lexer_next_token() == TOKEN_INTEGER);
-  assert(lexer_get_integer() == 23);
-  assert(lexer_next_token() == TOKEN_INTEGER);
-  assert(lexer_get_integer() == 46);
+  assert(lexer_next_token() == TOKEN_INT);
+  assert(lexer_get_int() == 23);
+  assert(lexer_next_token() == TOKEN_INT);
+  assert(lexer_get_int() == 46);
   return 0;
 }
 #include "../src/utils.h"
-TEST(lexer, decimal) {
+TEST(lexer, real) {
   lexer_set_code("42.13 23.5");
-  assert(lexer_next_token() == TOKEN_DECIMAL);
-  assert(lexer_get_decimal() == 42.13);
-  assert(lexer_next_token() == TOKEN_DECIMAL);
-  assert(lexer_get_decimal() == 23.5);
+  assert(lexer_next_token() == TOKEN_REAL);
+  assert(lexer_get_real() == 42.13);
+  assert(lexer_next_token() == TOKEN_REAL);
+  assert(lexer_get_real() == 23.5);
   return 0;
 }
 
@@ -231,10 +231,10 @@ TEST(lexer, complex) {
   assert(lexer_next_token() == TOKEN_IF);
   assert(lexer_next_token() == TOKEN_IDENT);
   assert(lexer_next_token() == TOKEN_LE);
-  assert(lexer_next_token() == TOKEN_INTEGER);
+  assert(lexer_next_token() == TOKEN_INT);
   assert(lexer_next_token() == TOKEN_LBLOCK);
   assert(lexer_next_token() == TOKEN_RET);
-  assert(lexer_next_token() == TOKEN_INTEGER);
+  assert(lexer_next_token() == TOKEN_INT);
   assert(lexer_next_token() == TOKEN_SEMI);
   assert(lexer_next_token() == TOKEN_RBLOCK);
   assert(lexer_next_token() == TOKEN_RET);
@@ -242,14 +242,14 @@ TEST(lexer, complex) {
   assert(lexer_next_token() == TOKEN_LPAREN);
   assert(lexer_next_token() == TOKEN_IDENT);
   assert(lexer_next_token() == TOKEN_SUB);
-  assert(lexer_next_token() == TOKEN_INTEGER);
+  assert(lexer_next_token() == TOKEN_INT);
   assert(lexer_next_token() == TOKEN_RPAREN);
   assert(lexer_next_token() == TOKEN_ADD);
   assert(lexer_next_token() == TOKEN_IDENT);
   assert(lexer_next_token() == TOKEN_LPAREN);
   assert(lexer_next_token() == TOKEN_IDENT);
   assert(lexer_next_token() == TOKEN_SUB);
-  assert(lexer_next_token() == TOKEN_INTEGER);
+  assert(lexer_next_token() == TOKEN_INT);
   assert(lexer_next_token() == TOKEN_RPAREN);
   assert(lexer_next_token() == TOKEN_SEMI);
   assert(lexer_next_token() == TOKEN_RBLOCK);
@@ -300,8 +300,8 @@ TESTS(lexer) {
   test_run(lexer, bwor);
 
   test_run(lexer, ident);
-  test_run(lexer, integer);
-  test_run(lexer, decimal);
+  test_run(lexer, int);
+  test_run(lexer, real);
 
   test_run(lexer, complex);
 }

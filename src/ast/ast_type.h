@@ -3,7 +3,9 @@
 typedef enum {
   AST_TY,
 
-  AST_NUM,
+  AST_INT,
+  AST_REAL,
+
   AST_VAR,
   AST_CALL,
   AST_BIN,
