@@ -14,10 +14,10 @@ TEST(codegen, testy) {
     "}"
   );
   parser_t* parser = create_parser(lexer);
+  codegen_t* codegen = create_codegen();
 
-  codegen_init();
-  codegen(parser_parse(parser));
-  LLVMDumpModule(module);
+  codegen_gen(codegen, parser_parse(parser));
+  codegen_dump(codegen);
 
   return 0;
 }

@@ -3,30 +3,42 @@
 #include <stdlib.h>
 #include "../etc.h"
 
-static int scope;
-static hashmap_t** scopes;
+struct scope_t {
+  int scope;
+  hashmap_t** scopes;
+};
 
-void scope_init() {
-  scope = 0;
-  scopes = calloc(sizeof(hashmap_t*), 16);
-  scopes[scope] = create_hashmap();
+scope_t* create_scope() {
+  scope_t* scope = malloc(sizeof(scope_t));
+  scope->scope = 0;
+  scope->scopes = calloc(sizeof(hashmap_t*), 16);
+  scope->scopes[scope->scope] = create_hashmap();
+  return scope;
 }
-void scope_next() {
-  scope++;
-  scopes[scope] = create_hashmap();
+void destroy_scope(scope_t* scope) {
+  for(int i = scope->scope; i >= 0; i--) {
+    hashmap_t* hashmap = scope->scopes[i];
+    destroy_hashmap(hashmap);
+  }
+  free(scope);
 }
-void scope_prev() {
-  destroy_hashmap(scopes[scope]);
-  scope--;
+
+void scope_next(scope_t* scope) {
+  scope->scope++;
+  scope->scopes[scope->scope] = create_hashmap();
 }
-rval_t* scope_get(char* name) {
-  for(int i = scope; i >= 0; i--) {
-    hashmap_t* hashmap = scopes[i];
+void scope_prev(scope_t* scope) {
+  destroy_hashmap(scope->scopes[scope->scope]);
+  scope->scope--;
+}
+rval_t* scope_get(scope_t* scope, char* name) {
+  for(int i = scope->scope; i >= 0; i--) {
+    hashmap_t* hashmap = scope->scopes[i];
     if (hashmap_contains(hashmap, name))
       return hashmap_get(hashmap, name);
   }
   return NULL;
 }
-void scope_set(char* name, void* val) {
-  hashmap_set(scopes[scope], name, val);
+void scope_set(scope_t* scope, char* name, void* val) {
+  hashmap_set(scope->scopes[scope->scope], name, val);
 }

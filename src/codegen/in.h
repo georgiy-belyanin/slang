@@ -1,3 +1,3 @@
-#pragma once
+// #pragma once
 
-void in_init(char* filename);
+// void in_init(char* filename);
