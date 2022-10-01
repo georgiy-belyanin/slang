@@ -38,7 +38,7 @@ func fib(n: i32): i32 {
 * func definition
 * branching
 * let, ret keywords
-* integer types
+* int types
 
 ## Planned features
 * float types

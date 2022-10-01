@@ -3,9 +3,9 @@ INCLUDE_PATH=$(INCLUDE_DIR)/
 LIB_DIR=lib
 LIB_PATH=$(LIB_DIR)/
 
-CC=gcc
+CC=cc
 CFLAGS=-I$(INCLUDE_DIR) $(shell llvm-config --cflags) -g -O0
-LD=gcc
+LD=cc
 LDFLAGS=$(shell llvm-config --ldflags --libs) -g -O0
 
 SRC_DIR=src

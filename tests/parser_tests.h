@@ -6,11 +6,12 @@
 #include "test.h"
 
 TEST(parser, func_decl) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   func_decl_ast_t* func_decl_ast = (func_decl_ast_t*) func_ast->decl;
   ty_ast_t* ty_ast = (ty_ast_t*) func_decl_ast->ty;
@@ -29,11 +30,12 @@ TEST(parser, func_decl) {
   return 0;
 }
 TEST(parser, let) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { let foo: i32; }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   let_ast_t* let_ast = (let_ast_t*) body_ast->stmts[0];
@@ -48,11 +50,12 @@ TEST(parser, let) {
   return 0;
 }
 TEST(parser, ret) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { ret 10; }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
@@ -64,11 +67,12 @@ TEST(parser, ret) {
   return 0;
 }
 TEST(parser, int) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { ret 10; }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
@@ -82,11 +86,12 @@ TEST(parser, int) {
   return 0;
 }
 TEST(parser, real) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { ret 10.0; }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
@@ -100,11 +105,12 @@ TEST(parser, real) {
   return 0;
 }
 TEST(parser, call) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { ret fib(1); }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
@@ -121,11 +127,12 @@ TEST(parser, call) {
   return 0;
 }
 TEST(parser, bin) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { ret 2 - n * 4; }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   ret_ast_t* ret_ast = (ret_ast_t*) body_ast->stmts[0];
@@ -151,11 +158,12 @@ TEST(parser, bin) {
   return 0;
 }
 TEST(parser, body) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { let a: i32; a = 10; ret a; }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   let_ast_t* let_ast = (let_ast_t*) body_ast->stmts[0];
@@ -171,11 +179,12 @@ TEST(parser, body) {
   return 0;
 }
 TEST(parser, if) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { if n > 10 { ret 10; } }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   if_ast_t* if_ast = (if_ast_t*) body_ast->stmts[0];
@@ -193,11 +202,12 @@ TEST(parser, if) {
   return 0;
 }
 TEST(parser, while) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { while n > 10 { ret 10; } }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   while_ast_t* while_ast = (while_ast_t*) body_ast->stmts[0];
@@ -215,11 +225,12 @@ TEST(parser, while) {
   return 0;
 }
 TEST(parser, loop) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 { loop { ret 10; } }"
   );
+  parser_t* parser = create_parser(lexer);
 
-  ast_t* ast = parser_parse();
+  ast_t* ast = parser_parse(parser);
   func_ast_t* func_ast = (func_ast_t*) ast;
   body_ast_t* body_ast = (body_ast_t*) func_ast->body;
   loop_ast_t* loop_ast = (loop_ast_t*) body_ast->stmts[0];

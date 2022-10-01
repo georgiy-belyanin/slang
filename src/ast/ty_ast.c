@@ -2,6 +2,12 @@
 
 #include <stdlib.h>
 
+ast_t* create_arr_ty_ast(ast_t* ty, int size) {
+  return NULL;
+}
+ast_t* create_ptr_ty_ast(ast_t* ty) {
+  return NULL;
+}
 ast_t* create_ty_ast(char* name) {
   ty_ast_t* ty_ast = malloc(sizeof(ty_ast_t));
   

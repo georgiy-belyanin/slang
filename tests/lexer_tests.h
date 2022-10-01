@@ -6,211 +6,218 @@
 #include "test.h"
 
 TEST(lexer, func) {
-  lexer_set_code("func");
-  assert(lexer_next_token() == TOKEN_FUNC);
+  lexer_t* lexer = create_lexer("func");
+  assert(lexer_next_token(lexer) == TOKEN_FUNC);
   return 0;
 }
 TEST(lexer, let) {
-  lexer_set_code("let");
-  assert(lexer_next_token() == TOKEN_LET);
+  lexer_t* lexer = create_lexer("let");
+  assert(lexer_next_token(lexer) == TOKEN_LET);
   return 0;
 }
 TEST(lexer, ret) {
-  lexer_set_code("ret");
-  assert(lexer_next_token() == TOKEN_RET);
+  lexer_t* lexer = create_lexer("ret");
+  assert(lexer_next_token(lexer) == TOKEN_RET);
   return 0;
 }
 TEST(lexer, ext) {
-  lexer_set_code("ext");
-  assert(lexer_next_token() == TOKEN_EXT);
+  lexer_t* lexer = create_lexer("ext");
+  assert(lexer_next_token(lexer) == TOKEN_EXT);
   return 0;
 }
 TEST(lexer, if) {
-  lexer_set_code("if");
-  assert(lexer_next_token() == TOKEN_IF);
+  lexer_t* lexer = create_lexer("if");
+  assert(lexer_next_token(lexer) == TOKEN_IF);
   return 0;
 }
 TEST(lexer, else) {
-  lexer_set_code("else");
-  assert(lexer_next_token() == TOKEN_ELSE);
+  lexer_t* lexer = create_lexer("else");
+  assert(lexer_next_token(lexer) == TOKEN_ELSE);
   return 0;
 }
 TEST(lexer, while) {
-  lexer_set_code("while");
-  assert(lexer_next_token() == TOKEN_WHILE);
+  lexer_t* lexer = create_lexer("while");
+  assert(lexer_next_token(lexer) == TOKEN_WHILE);
   return 0;
 }
 TEST(lexer, loop) {
-  lexer_set_code("loop");
-  assert(lexer_next_token() == TOKEN_LOOP);
+  lexer_t* lexer = create_lexer("loop");
+  assert(lexer_next_token(lexer) == TOKEN_LOOP);
   return 0;
 }
 
 TEST(lexer, colon) {
-  lexer_set_code(":");
-  assert(lexer_next_token() == TOKEN_COLON);
+  lexer_t* lexer = create_lexer(":");
+  assert(lexer_next_token(lexer) == TOKEN_COLON);
   return 0;
 }
 TEST(lexer, semi) {
-  lexer_set_code(";");
-  assert(lexer_next_token() == TOKEN_SEMI);
+  lexer_t* lexer = create_lexer(";");
+  assert(lexer_next_token(lexer) == TOKEN_SEMI);
   return 0;
 }
 TEST(lexer, dot) {
-  lexer_set_code(".");
-  assert(lexer_next_token() == TOKEN_DOT);
+  lexer_t* lexer = create_lexer(".");
+  assert(lexer_next_token(lexer) == TOKEN_DOT);
   return 0;
 }
 TEST(lexer, comma) {
-  lexer_set_code(",");
-  assert(lexer_next_token() == TOKEN_COMMA);
+  lexer_t* lexer = create_lexer(",");
+  assert(lexer_next_token(lexer) == TOKEN_COMMA);
   return 0;
 }
 TEST(lexer, lparen) {
-  lexer_set_code("(");
-  assert(lexer_next_token() == TOKEN_LPAREN);
+  lexer_t* lexer = create_lexer("(");
+  assert(lexer_next_token(lexer) == TOKEN_LPAREN);
   return 0;
 }
 TEST(lexer, rparen) {
-  lexer_set_code(")");
-  assert(lexer_next_token() == TOKEN_RPAREN);
+  lexer_t* lexer = create_lexer(")");
+  assert(lexer_next_token(lexer) == TOKEN_RPAREN);
   return 0;
 }
 TEST(lexer, lbracket) {
-  lexer_set_code("[");
-  assert(lexer_next_token() == TOKEN_LBRACKET);
+  lexer_t* lexer = create_lexer("[");
+  assert(lexer_next_token(lexer) == TOKEN_LBRACKET);
   return 0;
 }
 TEST(lexer, rbracket) {
-  lexer_set_code("]");
-  assert(lexer_next_token() == TOKEN_RBRACKET);
+  lexer_t* lexer = create_lexer("]");
+  assert(lexer_next_token(lexer) == TOKEN_RBRACKET);
   return 0;
 }
 TEST(lexer, lblock) {
-  lexer_set_code("{");
-  assert(lexer_next_token() == TOKEN_LBLOCK);
+  lexer_t* lexer = create_lexer("{");
+  assert(lexer_next_token(lexer) == TOKEN_LBLOCK);
   return 0;
 }
 TEST(lexer, rblock) {
-  lexer_set_code("}");
-  assert(lexer_next_token() == TOKEN_RBLOCK);
+  lexer_t* lexer = create_lexer("}");
+  assert(lexer_next_token(lexer) == TOKEN_RBLOCK);
   return 0;
 }
 
 TEST(lexer, assign) {
-  lexer_set_code("=");
-  assert(lexer_next_token() == TOKEN_ASSIGN);
+  lexer_t* lexer = create_lexer("=");
+  assert(lexer_next_token(lexer) == TOKEN_ASSIGN);
   return 0;
 }
 TEST(lexer, add) {
-  lexer_set_code("+");
-  assert(lexer_next_token() == TOKEN_ADD);
+  lexer_t* lexer = create_lexer("+");
+  assert(lexer_next_token(lexer) == TOKEN_ADD);
   return 0;
 }
 TEST(lexer, sub) {
-  lexer_set_code("-");
-  assert(lexer_next_token() == TOKEN_SUB);
+  lexer_t* lexer = create_lexer("-");
+  assert(lexer_next_token(lexer) == TOKEN_SUB);
   return 0;
 }
 TEST(lexer, mul) {
-  lexer_set_code("*");
-  assert(lexer_next_token() == TOKEN_MUL);
+  lexer_t* lexer = create_lexer("*");
+  assert(lexer_next_token(lexer) == TOKEN_MUL);
   return 0;
 }
 TEST(lexer, div) {
-  lexer_set_code("/");
-  assert(lexer_next_token() == TOKEN_DIV);
+  lexer_t* lexer = create_lexer("/");
+  assert(lexer_next_token(lexer) == TOKEN_DIV);
   return 0;
 }
 
 TEST(lexer, eq) {
-  lexer_set_code("==");
-  assert(lexer_next_token() == TOKEN_EQ);
+  lexer_t* lexer = create_lexer("==");
+  assert(lexer_next_token(lexer) == TOKEN_EQ);
   return 0;
 }
 TEST(lexer, ne) {
-  lexer_set_code("!=");
-  assert(lexer_next_token() == TOKEN_NE);
+  lexer_t* lexer = create_lexer("!=");
+  assert(lexer_next_token(lexer) == TOKEN_NE);
   return 0;
 }
 TEST(lexer, less) {
-  lexer_set_code("<");
-  assert(lexer_next_token() == TOKEN_LESS);
+  lexer_t* lexer = create_lexer("<");
+  assert(lexer_next_token(lexer) == TOKEN_LESS);
   return 0;
 }
 TEST(lexer, le) {
-  lexer_set_code("<=");
-  assert(lexer_next_token() == TOKEN_LE);
+  lexer_t* lexer = create_lexer("<=");
+  assert(lexer_next_token(lexer) == TOKEN_LE);
   return 0;
 }
 TEST(lexer, grtr) {
-  lexer_set_code(">");
-  assert(lexer_next_token() == TOKEN_GRTR);
+  lexer_t* lexer = create_lexer(">");
+  assert(lexer_next_token(lexer) == TOKEN_GRTR);
   return 0;
 }
 TEST(lexer, ge) {
-  lexer_set_code(">=");
-  assert(lexer_next_token() == TOKEN_GE);
+  lexer_t* lexer = create_lexer(">=");
+  assert(lexer_next_token(lexer) == TOKEN_GE);
   return 0;
 }
 
 TEST(lexer, not) {
-  lexer_set_code("!");
-  assert(lexer_next_token() == TOKEN_NOT);
+  lexer_t* lexer = create_lexer("!");
+  assert(lexer_next_token(lexer) == TOKEN_NOT);
   return 0;
 }
 TEST(lexer, and) {
-  lexer_set_code("&&");
-  assert(lexer_next_token() == TOKEN_AND);
+  lexer_t* lexer = create_lexer("&&");
+  assert(lexer_next_token(lexer) == TOKEN_AND);
   return 0;
 }
 TEST(lexer, or) {
-  lexer_set_code("||");
-  assert(lexer_next_token() == TOKEN_OR);
+  lexer_t* lexer = create_lexer("||");
+  assert(lexer_next_token(lexer) == TOKEN_OR);
   return 0;
 }
 
 TEST(lexer, bwand) {
-  lexer_set_code("&");
-  assert(lexer_next_token() == TOKEN_BWAND);
+  lexer_t* lexer = create_lexer("&");
+  assert(lexer_next_token(lexer) == TOKEN_BWAND);
   return 0;
 }
 TEST(lexer, bwor) {
-  lexer_set_code("|");
-  assert(lexer_next_token() == TOKEN_BWOR);
+  lexer_t* lexer = create_lexer("|");
+  assert(lexer_next_token(lexer) == TOKEN_BWOR);
   return 0;
 }
 
 TEST(lexer, ident) {
-  lexer_set_code("foo bar");
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(strcmp(lexer_get_ident(), "foo") == 0);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(strcmp(lexer_get_ident(), "bar") == 0);
+  lexer_t* lexer = create_lexer("foo bar");
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(strcmp(lexer_get_ident(lexer), "foo") == 0);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(strcmp(lexer_get_ident(lexer), "bar") == 0);
   return 0;
 }
 TEST(lexer, int) {
-  lexer_set_code("23 46");
-  assert(lexer_next_token() == TOKEN_INT);
-  assert(lexer_get_int() == 23);
-  assert(lexer_next_token() == TOKEN_INT);
-  assert(lexer_get_int() == 46);
+  lexer_t* lexer = create_lexer("23 46");
+  assert(lexer_next_token(lexer) == TOKEN_INT);
+  assert(lexer_get_int(lexer) == 23);
+  assert(lexer_next_token(lexer) == TOKEN_INT);
+  assert(lexer_get_int(lexer) == 46);
   return 0;
 }
-#include "../src/utils.h"
 TEST(lexer, real) {
-  lexer_set_code("42.13 23.5");
-  assert(lexer_next_token() == TOKEN_REAL);
-  assert(lexer_get_real() == 42.13);
-  assert(lexer_next_token() == TOKEN_REAL);
-  assert(lexer_get_real() == 23.5);
+  lexer_t* lexer = create_lexer("42.13 23.5");
+  assert(lexer_next_token(lexer) == TOKEN_REAL);
+  assert(lexer_get_real(lexer) == 42.13);
+  assert(lexer_next_token(lexer) == TOKEN_REAL);
+  assert(lexer_get_real(lexer) == 23.5);
+  return 0;
+}
+TEST(lexer, str) {
+  lexer_t* lexer = create_lexer("\"Hey\"");
+  assert(lexer_next_token(lexer) == TOKEN_STR);
+  assert(lexer_get_real(lexer) == 42.13);
+  assert(lexer_next_token(lexer) == TOKEN_REAL);
+  assert(lexer_get_real(lexer) == 23.5);
   return 0;
 }
 
 
 
 TEST(lexer, complex) {
-  lexer_set_code(
+  lexer_t* lexer = create_lexer(
     "func fib(n: i32): i32 {\n"
     "  if n <= 2 {\n"
     "   ret 1;\n"
@@ -218,47 +225,50 @@ TEST(lexer, complex) {
     "  ret fib(n - 1) + fib(n - 2);\n"
     "}"
   );
-  assert(lexer_next_token() == TOKEN_FUNC);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_LPAREN);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_COLON);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_RPAREN);
-  assert(lexer_next_token() == TOKEN_COLON);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_LBLOCK);
-  assert(lexer_next_token() == TOKEN_IF);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_LE);
-  assert(lexer_next_token() == TOKEN_INT);
-  assert(lexer_next_token() == TOKEN_LBLOCK);
-  assert(lexer_next_token() == TOKEN_RET);
-  assert(lexer_next_token() == TOKEN_INT);
-  assert(lexer_next_token() == TOKEN_SEMI);
-  assert(lexer_next_token() == TOKEN_RBLOCK);
-  assert(lexer_next_token() == TOKEN_RET);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_LPAREN);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_SUB);
-  assert(lexer_next_token() == TOKEN_INT);
-  assert(lexer_next_token() == TOKEN_RPAREN);
-  assert(lexer_next_token() == TOKEN_ADD);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_LPAREN);
-  assert(lexer_next_token() == TOKEN_IDENT);
-  assert(lexer_next_token() == TOKEN_SUB);
-  assert(lexer_next_token() == TOKEN_INT);
-  assert(lexer_next_token() == TOKEN_RPAREN);
-  assert(lexer_next_token() == TOKEN_SEMI);
-  assert(lexer_next_token() == TOKEN_RBLOCK);
+  assert(lexer_next_token(lexer) == TOKEN_FUNC);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_LPAREN);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_COLON);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_RPAREN);
+  assert(lexer_next_token(lexer) == TOKEN_COLON);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_LBLOCK);
+  assert(lexer_next_token(lexer) == TOKEN_IF);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_LE);
+  assert(lexer_next_token(lexer) == TOKEN_INT);
+  assert(lexer_next_token(lexer) == TOKEN_LBLOCK);
+  assert(lexer_next_token(lexer) == TOKEN_RET);
+  assert(lexer_next_token(lexer) == TOKEN_INT);
+  assert(lexer_next_token(lexer) == TOKEN_SEMI);
+  assert(lexer_next_token(lexer) == TOKEN_RBLOCK);
+  assert(lexer_next_token(lexer) == TOKEN_RET);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_LPAREN);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_SUB);
+  assert(lexer_next_token(lexer) == TOKEN_INT);
+  assert(lexer_next_token(lexer) == TOKEN_RPAREN);
+  assert(lexer_next_token(lexer) == TOKEN_ADD);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_LPAREN);
+  assert(lexer_next_token(lexer) == TOKEN_IDENT);
+  assert(lexer_next_token(lexer) == TOKEN_SUB);
+  assert(lexer_next_token(lexer) == TOKEN_INT);
+  assert(lexer_next_token(lexer) == TOKEN_RPAREN);
+  assert(lexer_next_token(lexer) == TOKEN_SEMI);
+  assert(lexer_next_token(lexer) == TOKEN_RBLOCK);
 
+  //destroy_lexer(lexer);
 
   return 0;
 }
 
 TESTS(lexer) {
+  //test_run(lexer, trait);
+  //test_run(lexer, struct);
   test_run(lexer, func);
   test_run(lexer, let);
   test_run(lexer, ret);
@@ -267,6 +277,8 @@ TESTS(lexer) {
   test_run(lexer, else);
   test_run(lexer, while);
   test_run(lexer, loop);
+  //test_run(lexer, new);
+  //test_run(lexer, del);
 
   test_run(lexer, colon);
   test_run(lexer, semi);
@@ -278,6 +290,9 @@ TESTS(lexer) {
   test_run(lexer, rbracket);
   test_run(lexer, lblock);
   test_run(lexer, rblock);
+
+  //test_run(lexer, uptr);
+  //test_run(lexer, sptr);
 
   test_run(lexer, assign);
   test_run(lexer, add);
@@ -302,6 +317,7 @@ TESTS(lexer) {
   test_run(lexer, ident);
   test_run(lexer, int);
   test_run(lexer, real);
+  //test_run(lexer, str);
 
   test_run(lexer, complex);
 }

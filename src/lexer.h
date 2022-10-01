@@ -1,3 +1,3 @@
 #pragma once
 
-#include "lexer/lexer.h"
+#include "lexer/public.h"

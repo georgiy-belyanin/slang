@@ -1,10 +1,20 @@
 #pragma once
 
 #include "../tokens.h"
+#include "public.h"
 
-void lexer_set_code(char* code);
-token_t lexer_next_token();
+struct lexer_t {
+  char* code;
+  char cur;
+  int pos;
+  int row;
+  int col;
 
-char* lexer_get_ident();
-int lexer_get_int();
-double lexer_get_real();
+  char* ident;
+  int int_;
+  double real;
+  char* str;
+};
+
+void lexer_next(lexer_t* lexer);
+void lexer_skip_spaces(lexer_t* lexer);

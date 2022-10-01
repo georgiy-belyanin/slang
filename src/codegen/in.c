@@ -17,5 +17,6 @@ void in_init(char* filename) {
 
   content[fsize] = 0;
 
-  lexer_set_code(content);
+
+
 }

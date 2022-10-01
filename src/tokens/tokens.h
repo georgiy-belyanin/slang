@@ -4,6 +4,9 @@
   TOKEN(TOKEN_UNKNOWN, "[unknown token]")\
   TOKEN(TOKEN_EOF, "eof")\
   \
+  TOKEN(TOKEN_TRAIT, "trait")\
+  TOKEN(TOKEN_STRUCT, "struct")\
+  TOKEN(TOKEN_ENUM, "enum")\
   TOKEN(TOKEN_FUNC, "func")\
   TOKEN(TOKEN_LET, "let")\
   TOKEN(TOKEN_RET, "ret")\
@@ -12,6 +15,11 @@
   TOKEN(TOKEN_ELSE, "else")\
   TOKEN(TOKEN_WHILE, "while")\
   TOKEN(TOKEN_LOOP, "loop")\
+  TOKEN(TOKEN_NEW, "new")\
+  TOKEN(TOKEN_DEL, "del")\
+  \
+  TOKEN(TOKEN_TRUE, "true")\
+  TOKEN(TOKEN_FALSE, "false")\
   \
   TOKEN(TOKEN_COLON, ":")\
   TOKEN(TOKEN_SEMI, ";")\
@@ -23,6 +31,9 @@
   TOKEN(TOKEN_RBLOCK, "}")\
   TOKEN(TOKEN_LBRACKET, "[")\
   TOKEN(TOKEN_RBRACKET, "]")\
+  \
+  TOKEN(TOKEN_UPTR, "@")\
+  TOKEN(TOKEN_SPTR, "~")\
   \
   TOKEN(TOKEN_ASSIGN, "=")\
   TOKEN(TOKEN_ADD, "+")\
@@ -46,4 +57,5 @@
   \
   TOKEN(TOKEN_IDENT, "[identifier]")\
   TOKEN(TOKEN_INT, "[integer]")\
-  TOKEN(TOKEN_REAL, "[real]")
+  TOKEN(TOKEN_REAL, "[real]")\
+  TOKEN(TOKEN_STR, "[string]")
