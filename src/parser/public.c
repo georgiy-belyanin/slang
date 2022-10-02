@@ -11,7 +11,6 @@ parser_t* create_parser(lexer_t* lexer) {
   return parser;
 }
 void destroy_parser(parser_t* parser) {
-  destroy_lexer(parser->lexer);
   free(parser);
 }
 

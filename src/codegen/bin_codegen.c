@@ -106,7 +106,6 @@ static rval_t* codegen_gen_or(codegen_t* codegen, rval_t* lhs, rval_t* rhs) {
   return create_rval(val, lhs->ty);
 }
 
-
 unit_t* codegen_gen_bin(codegen_t* codegen, bin_ast_t* bin_ast) {
   unit_t* lhs = (rval_t*) codegen_gen(codegen, bin_ast->lhs);
   unit_t* rhs = (rval_t*) codegen_gen(codegen, bin_ast->rhs);
