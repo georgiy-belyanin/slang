@@ -5,6 +5,16 @@
 #include "../src/tokens.h"
 #include "test.h"
 
+TEST(lexer, trait) {
+  lexer_t* lexer = create_lexer("trait");
+  assert(lexer_next_token(lexer) == TOKEN_TRAIT);
+  return 0;
+}
+TEST(lexer, struct) {
+  lexer_t* lexer = create_lexer("struct");
+  assert(lexer_next_token(lexer) == TOKEN_STRUCT);
+  return 0;
+}
 TEST(lexer, func) {
   lexer_t* lexer = create_lexer("func");
   assert(lexer_next_token(lexer) == TOKEN_FUNC);
@@ -45,6 +55,27 @@ TEST(lexer, loop) {
   assert(lexer_next_token(lexer) == TOKEN_LOOP);
   return 0;
 }
+TEST(lexer, new) {
+  lexer_t* lexer = create_lexer("new");
+  assert(lexer_next_token(lexer) == TOKEN_NEW);
+  return 0;
+}
+TEST(lexer, del) {
+  lexer_t* lexer = create_lexer("del");
+  assert(lexer_next_token(lexer) == TOKEN_DEL);
+  return 0;
+}
+
+TEST(lexer, true) {
+  lexer_t* lexer = create_lexer("true");
+  assert(lexer_next_token(lexer) == TOKEN_TRUE);
+  return 0;
+}
+TEST(lexer, false) {
+  lexer_t* lexer = create_lexer("false");
+  assert(lexer_next_token(lexer) == TOKEN_FALSE);
+  return 0;
+}
 
 TEST(lexer, colon) {
   lexer_t* lexer = create_lexer(":");
@@ -76,16 +107,6 @@ TEST(lexer, rparen) {
   assert(lexer_next_token(lexer) == TOKEN_RPAREN);
   return 0;
 }
-TEST(lexer, lbracket) {
-  lexer_t* lexer = create_lexer("[");
-  assert(lexer_next_token(lexer) == TOKEN_LBRACKET);
-  return 0;
-}
-TEST(lexer, rbracket) {
-  lexer_t* lexer = create_lexer("]");
-  assert(lexer_next_token(lexer) == TOKEN_RBRACKET);
-  return 0;
-}
 TEST(lexer, lblock) {
   lexer_t* lexer = create_lexer("{");
   assert(lexer_next_token(lexer) == TOKEN_LBLOCK);
@@ -96,6 +117,27 @@ TEST(lexer, rblock) {
   assert(lexer_next_token(lexer) == TOKEN_RBLOCK);
   return 0;
 }
+TEST(lexer, lbracket) {
+  lexer_t* lexer = create_lexer("[");
+  assert(lexer_next_token(lexer) == TOKEN_LBRACKET);
+  return 0;
+}
+TEST(lexer, rbracket) {
+  lexer_t* lexer = create_lexer("]");
+  assert(lexer_next_token(lexer) == TOKEN_RBRACKET);
+  return 0;
+}
+TEST(lexer, uptr) {
+  lexer_t* lexer = create_lexer("@");
+  assert(lexer_next_token(lexer) == TOKEN_UPTR);
+  return 0;
+}
+TEST(lexer, sptr) {
+  lexer_t* lexer = create_lexer("~");
+  assert(lexer_next_token(lexer) == TOKEN_SPTR);
+  return 0;
+}
+
 
 TEST(lexer, assign) {
   lexer_t* lexer = create_lexer("=");
@@ -267,8 +309,8 @@ TEST(lexer, complex) {
 }
 
 TESTS(lexer) {
-  //test_run(lexer, trait);
-  //test_run(lexer, struct);
+  test_run(lexer, trait);
+  test_run(lexer, struct);
   test_run(lexer, func);
   test_run(lexer, let);
   test_run(lexer, ret);
@@ -277,8 +319,11 @@ TESTS(lexer) {
   test_run(lexer, else);
   test_run(lexer, while);
   test_run(lexer, loop);
-  //test_run(lexer, new);
-  //test_run(lexer, del);
+  test_run(lexer, new);
+  test_run(lexer, del);
+
+  test_run(lexer, true);
+  test_run(lexer, false);
 
   test_run(lexer, colon);
   test_run(lexer, semi);
@@ -291,8 +336,8 @@ TESTS(lexer) {
   test_run(lexer, lblock);
   test_run(lexer, rblock);
 
-  //test_run(lexer, uptr);
-  //test_run(lexer, sptr);
+  test_run(lexer, uptr);
+  test_run(lexer, sptr);
 
   test_run(lexer, assign);
   test_run(lexer, add);

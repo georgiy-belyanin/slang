@@ -18,7 +18,8 @@ typedef struct out_t out_t;
 out_t* create_out(codegen_t* codegen);
 void destroy_out(out_t* out);
 
-void out_obj(out_t* codegen, char* name);
+void out_obj(out_t* out, char* name);
+void out_txt(out_t* out, char* name);
 
 
 

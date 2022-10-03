@@ -3,14 +3,16 @@
 #include <stdlib.h>
 
 static ast_t* parser_parse_uptr_ty(parser_t* parser) {
-  // parser_eat(parser, TOKEN_UPTR);
-  // return create_uptr_ty_ast(parser_parse_ty(parser));
-  return NULL;
+  parser_eat(parser, TOKEN_UPTR);
+  return create_uptr_ty_ast(parser_parse_ty(parser));
 }
 static ast_t* parser_parse_sptr_ty(parser_t* parser) {
-  //parser_eat(parser, TOKEN_SPTR);
-  //return create_sptr_ty_ast(parser_parse_ty(parser));
-  return NULL;
+  parser_eat(parser, TOKEN_SPTR);
+  return create_sptr_ty_ast(parser_parse_ty(parser));
+}
+static ast_t* parser_parse_ptr_ty(parser_t* parser) {
+  parser_eat(parser, TOKEN_MUL);
+  return create_sptr_ty_ast(parser_parse_ty(parser));
 }
 
 ast_t* parser_parse_ty(parser_t* parser) {
@@ -18,6 +20,8 @@ ast_t* parser_parse_ty(parser_t* parser) {
     return parser_parse_uptr_ty(parser);
   else if (parser->cur == TOKEN_SPTR) 
     return parser_parse_sptr_ty(parser);
+  else if (parser->cur == TOKEN_MUL) 
+    return parser_parse_ptr_ty(parser);
   // else if (parser->cur == TOKEN_LBLOCK) 
   //   return parse_arr_ty(parser);
   else if (parser->cur == TOKEN_IDENT)

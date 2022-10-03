@@ -33,6 +33,10 @@ token_t lexer_next_sym(lexer_t* lexer) {
     return TOKEN_MUL;
   else if (prev == '/')
     return TOKEN_DIV;
+  else if (prev == '@')
+    return TOKEN_UPTR;
+  else if (prev == '~')
+    return TOKEN_SPTR;
   else if (prev == '=') {
     if (lexer->cur == '=') {
       lexer_next(lexer);

@@ -5,6 +5,13 @@
 ast_t* create_arr_ty_ast(ast_t* ty, int size) {
   return NULL;
 }
+ast_t* create_uptr_ty_ast(ast_t* ty) {
+  //uptr_ty_ast_t* uptr_ty_ast = malloc(sizeof())
+  return NULL;
+}
+ast_t* create_sptr_ty_ast(ast_t* ty) {
+  return NULL;
+}
 ast_t* create_ptr_ty_ast(ast_t* ty) {
   return NULL;
 }

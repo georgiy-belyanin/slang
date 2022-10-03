@@ -7,8 +7,12 @@ typedef struct {
   ast_type_t type;
   
   ast_t* ty;
-  int size;
-} arr_ty_ast_t;
+} uptr_ty_ast_t;
+typedef struct {
+  ast_type_t type;
+  
+  ast_t* ty;
+} sptr_ty_ast_t;
 typedef struct {
   ast_type_t type;
   
@@ -17,10 +21,18 @@ typedef struct {
 typedef struct {
   ast_type_t type;
   
+  ast_t* ty;
+  int size;
+} arr_ty_ast_t;
+typedef struct {
+  ast_type_t type;
+  
   char* name;
 } ty_ast_t;
 
 ast_t* create_arr_ty_ast(ast_t* ty, int size);
+ast_t* create_uptr_ty_ast(ast_t* ty);
+ast_t* create_sptr_ty_ast(ast_t* ty);
 ast_t* create_ptr_ty_ast(ast_t* ty);
 ast_t* create_ty_ast(char* name);
 void destroy_ty_ast(ty_ast_t* ty_ast);

@@ -96,7 +96,6 @@ out_t* create_out(codegen_t* codegen) {
   LLVMInitializeAllAsmParsers();
   LLVMInitializeAllAsmPrinters();
 
-  LLVMPrintModuleToFile(out->module, "module.txt", &errors);
 
   LLVMTargetRef target;
   LLVMGetTargetFromTriple(LLVMGetDefaultTargetTriple(), &target, &errors);
@@ -120,7 +119,11 @@ void out_obj(out_t* out, char* name) {
 
   LLVMTargetMachineEmitToFile(out->machine, out->module, name, LLVMObjectFile, &errors); 
 }
-
+void out_txt(out_t* out, char* name) {
+  char* errors = calloc(sizeof(char), 1024);
+  
+  LLVMPrintModuleToFile(out->module, "module.txt", &errors);
+}
 
 
 #include <stdio.h>

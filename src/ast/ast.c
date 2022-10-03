@@ -37,8 +37,6 @@ void destroy_ast(ast_t* ast) {
     destroy_let_ast((let_ast_t*) ast);
   else if (ast->type == AST_LOOP)
     destroy_loop_ast((loop_ast_t*) ast);
-  else if (ast->type == AST_WHILE)
-    destroy_while_ast((while_ast_t*) ast);
   else if (ast->type == AST_REAL)
     destroy_real_ast((real_ast_t*) ast);
   else if (ast->type == AST_RET)
@@ -47,4 +45,6 @@ void destroy_ast(ast_t* ast) {
     destroy_ty_ast((ty_ast_t*) ast);
   else if (ast->type == AST_VAR)
     destroy_var_ast((var_ast_t*) ast);
+  else if (ast->type == AST_WHILE)
+    destroy_while_ast((while_ast_t*) ast);
 }
