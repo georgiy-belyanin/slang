@@ -29,6 +29,10 @@ void destroy_tys(tys_t* tys) {
   destroy_hashmap(tys->tys);
   free(tys);
 }
+
 unit_t* tys_get(tys_t* tys, char* name) {
   return hashmap_get(tys->tys, name);
+}
+void tys_set(tys_t* tys, char* name, unit_t* val) {
+  hashmap_set(tys->tys, name, val);
 }

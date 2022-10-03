@@ -28,4 +28,4 @@ rval_t* codegen_scope_get(codegen_t* codegen, char* name);
 void codegen_scope_set(codegen_t* codegen, char* name, void* val);
 
 unit_t* codegen_tys_get(codegen_t* codegen, char* name);
-
+void codegen_tys_set(codegen_t* codegen, char* name, unit_t* val);

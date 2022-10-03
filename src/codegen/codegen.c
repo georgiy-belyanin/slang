@@ -18,4 +18,6 @@ void codegen_scope_set(codegen_t* codegen, char* name, void* val) {
 unit_t* codegen_tys_get(codegen_t* codegen, char* name) {
   return tys_get(codegen->tys, name);
 }
-
+void codegen_tys_set(codegen_t* codegen, char* name, unit_t* val) {
+  tys_set(codegen->tys, name, val);
+}

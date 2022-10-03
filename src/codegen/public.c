@@ -13,6 +13,7 @@
 #include "loop_codegen.h"
 #include "real_codegen.h"
 #include "ret_codegen.h"
+#include "struct_codegen.h"
 #include "ty_codegen.h"
 #include "var_codegen.h"
 #include "while_codegen.h"
@@ -59,6 +60,8 @@ unit_t* codegen_gen(codegen_t* codegen, ast_t* ast) {
     return codegen_gen_real(codegen, (real_ast_t*) ast);
   else if (ast->type == AST_RET)
     return codegen_gen_ret(codegen, (ret_ast_t*) ast);
+  else if (ast->type == AST_STRUCT)
+    return codegen_gen_struct(codegen, (struct_ast_t*) ast);
   else if (ast->type == AST_TY)
     return codegen_gen_ty(codegen, (ty_ast_t*) ast);
   else if (ast->type == AST_VAR)

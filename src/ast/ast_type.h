@@ -2,6 +2,10 @@
 
 typedef enum {
   AST_TY,
+  AST_PTR_TY,
+  AST_UPTR_TY,
+  AST_SPTR_TY,
+  AST_ARR_TY,
 
   AST_INT,
   AST_REAL,
@@ -16,6 +20,8 @@ typedef enum {
   AST_LOOP,
   AST_WHILE,
   AST_BODY,
+
+  AST_STRUCT,
 
   AST_FUNC_DECL,
   AST_FUNC,
