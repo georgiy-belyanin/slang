@@ -18,8 +18,10 @@ TEST(hashmap, set) {
 TEST(hashmap, get) {
   hashmap_t* hashmap = create_hashmap();
   hashmap_set(hashmap, "foo", "bar");
+  hashmap_set(hashmap, "bar", "buz");
   hashmap_set(hashmap, "buz", "qux");
   assert(strcmp(hashmap_get(hashmap, "foo"), "bar") == 0);
+  assert(strcmp(hashmap_get(hashmap, "bar"), "buz") == 0);
   assert(strcmp(hashmap_get(hashmap, "buz"), "qux") == 0);
   hashmap_set(hashmap, "foo", "foo");
   assert(strcmp(hashmap_get(hashmap, "foo"), "foo") == 0);

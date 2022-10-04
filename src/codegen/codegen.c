@@ -21,3 +21,13 @@ unit_t* codegen_tys_get(codegen_t* codegen, char* name) {
 void codegen_tys_set(codegen_t* codegen, char* name, unit_t* val) {
   tys_set(codegen->tys, name, val);
 }
+
+int codegen_structs_get(codegen_t* codegen, char* name, char* field) {
+  return structs_get(codegen->structs, name, field);
+}
+unit_t* codegen_structs_get_ty(codegen_t* codegen, char* name, char* field) {
+  return structs_get_ty(codegen->structs, name, field);
+}
+void codegen_structs_set(codegen_t* codegen, char* name, char** fields, unit_t* field_tys, int field_count) {
+  return structs_set(codegen->structs, name, fields, field_tys, field_count);
+}

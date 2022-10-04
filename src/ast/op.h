@@ -25,4 +25,6 @@ typedef enum {
 
   OP_MINUS,
   OP_NOT,
+
+  OP_DOT
 } op_t;

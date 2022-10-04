@@ -26,6 +26,7 @@ codegen_t* create_codegen() {
 
   codegen->scope = create_scope();
   codegen->tys = create_tys(codegen->context);
+  codegen->structs = create_structs();
 
   return codegen;
 }

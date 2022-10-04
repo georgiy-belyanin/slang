@@ -39,6 +39,9 @@ static op_t bin_op_from_token(token_t token) {
     return OP_BWAND;
   else if (token == TOKEN_BWOR)
     return OP_BWOR;
+
+  else if (token == TOKEN_DOT)
+    return OP_DOT;
   return OP_UNKNOWN;
 }
 static int op_get_prec(op_t op) {
@@ -60,6 +63,8 @@ static int op_get_prec(op_t op) {
     return 60;
   else if (op == OP_NOT)
     return 70;
+  else if (op == OP_DOT)
+    return 100;
   else 
     return -1;
 }

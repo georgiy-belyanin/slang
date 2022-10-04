@@ -23,7 +23,7 @@
   \
   TOKEN(TOKEN_COLON, ":")\
   TOKEN(TOKEN_SEMI, ";")\
-  TOKEN(TOKEN_DOT, ",")\
+  TOKEN(TOKEN_DOT, ".")\
   TOKEN(TOKEN_COMMA, ",")\
   TOKEN(TOKEN_LPAREN, "(")\
   TOKEN(TOKEN_RPAREN, ")")\
