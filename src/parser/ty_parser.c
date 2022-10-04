@@ -12,15 +12,17 @@ static ast_t* parser_parse_sptr_ty(parser_t* parser) {
 }
 static ast_t* parser_parse_ptr_ty(parser_t* parser) {
   parser_eat(parser, TOKEN_MUL);
-  return create_sptr_ty_ast(parser_parse_ty(parser));
+  return create_ptr_ty_ast(parser_parse_ty(parser));
 }
+
+#include <stdio.h>
 
 ast_t* parser_parse_ty(parser_t* parser) {
   if (parser->cur == TOKEN_UPTR) 
     return parser_parse_uptr_ty(parser);
   else if (parser->cur == TOKEN_SPTR) 
     return parser_parse_sptr_ty(parser);
-  else if (parser->cur == TOKEN_MUL) 
+  else if (parser->cur == TOKEN_MUL)
     return parser_parse_ptr_ty(parser);
   // else if (parser->cur == TOKEN_LBLOCK) 
   //   return parse_arr_ty(parser);

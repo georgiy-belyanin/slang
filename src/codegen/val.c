@@ -4,9 +4,11 @@
 
 rval_t* create_rval(unit_t* val, unit_t* ty) {
   rval_t* rval = malloc(sizeof(rval_t));
+  
   rval->type = VAL_RVAL;
   rval->val = val;
   rval->ty = ty;
+
   return rval;
 }
 void destroy_rval(rval_t* rval) {
@@ -15,10 +17,12 @@ void destroy_rval(rval_t* rval) {
 
 lval_t* create_lval(unit_t* val, unit_t* ty, unit_t* ptr) {
   lval_t* lval = malloc(sizeof(lval_t));
+
   lval->type = VAL_LVAL;
   lval->val = val;
   lval->ty = ty;
   lval->ptr = ptr;
+
   return lval;
 }
 void destroy_lval(lval_t* lval) {

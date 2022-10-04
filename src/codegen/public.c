@@ -57,6 +57,8 @@ unit_t* codegen_gen(codegen_t* codegen, ast_t* ast) {
     return codegen_gen_let(codegen, (let_ast_t*) ast);
   else if (ast->type == AST_LOOP)
     return codegen_gen_loop(codegen, (loop_ast_t*) ast);
+  else if (ast->type == AST_PTR_TY)
+    return codegen_gen_ptr_ty(codegen, (ptr_ty_ast_t*) ast);
   else if (ast->type == AST_REAL)
     return codegen_gen_real(codegen, (real_ast_t*) ast);
   else if (ast->type == AST_RET)

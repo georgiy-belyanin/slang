@@ -109,10 +109,11 @@ static rval_t* codegen_gen_or(codegen_t* codegen, rval_t* lhs, rval_t* rhs) {
 static lval_t* codegen_gen_dot(codegen_t* codegen, bin_ast_t* bin_ast) {
   lval_t* lhs = (lval_t*) codegen_gen(codegen, bin_ast->lhs);
   var_ast_t* var_ast = (var_ast_t*) bin_ast->rhs;
+  char* name = (char*) LLVMGetStructName(lhs->ty);
   char* field_name = var_ast->name;
 
-  int field = codegen_structs_get(codegen, LLVMGetStructName(lhs->ty), field_name);
-  unit_t* field_ty = codegen_structs_get_ty(codegen, LLVMGetStructName(lhs->ty), field_name);
+  int field = codegen_structs_get(codegen, name, field_name);
+  unit_t* field_ty = codegen_structs_get_ty(codegen, name, field_name);
   unit_t* ptr = LLVMBuildStructGEP2(codegen->builder, lhs->ty, lhs->ptr, field, "gep_res");
   unit_t* val = LLVMBuildLoad2(codegen->builder, field_ty, ptr, "gep_val");
   return create_lval(val, lhs->ty, ptr);

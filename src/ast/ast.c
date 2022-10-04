@@ -37,6 +37,8 @@ void destroy_ast(ast_t* ast) {
     destroy_let_ast((let_ast_t*) ast);
   else if (ast->type == AST_LOOP)
     destroy_loop_ast((loop_ast_t*) ast);
+  else if (ast->type == AST_PTR_TY)
+    destroy_ptr_ty_ast((ptr_ty_ast_t*) ast);
   else if (ast->type == AST_REAL)
     destroy_real_ast((real_ast_t*) ast);
   else if (ast->type == AST_RET)
