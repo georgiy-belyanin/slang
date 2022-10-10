@@ -14,8 +14,9 @@ static void handle_no_files(args_t* args) {
 static void handle_help(args_t* args) {
   if (!args_flags_get(args, FLAG_TYPE_HELP))
     return;
+
   log("\n");
-  log("Usage: slang [options] <file> make\n");
+  log("Usage: slang [options] <file>\n");
   log("\n");
   log("Arguments: \n");
   log("  -i            | --ir             - generates LLVM IR in 'module.txt'.\n");

@@ -7,25 +7,77 @@
 
 TEST(parser, func_decl) {
   lexer_t* lexer = create_lexer(
-    "func fib(n: i32): i32 { }"
+    "func fib(n: i32): i32 { }\n"
+    "func log(base: f32, n: f32): f32 { }\n"
   );
   parser_t* parser = create_parser(lexer);
 
+  ast_t* ast1 = parser_parse(parser);
+  func_ast_t* func_ast1 = (func_ast_t*) ast1;
+  func_decl_ast_t* func_decl_ast1 = (func_decl_ast_t*) func_ast1->decl;
+  ty_ast_t* ty_ast1 = (ty_ast_t*) func_decl_ast1->ty;
+  char* arg_name1 = func_decl_ast1->arg_names[0];
+  ty_ast_t* arg_ty_ast1 = (ty_ast_t*) func_decl_ast1->arg_tys[0];
+
+  ast_t* ast2 = parser_parse(parser);
+  func_ast_t* func_ast2 = (func_ast_t*) ast2;
+  func_decl_ast_t* func_decl_ast2 = (func_decl_ast_t*) func_ast2->decl;
+  ty_ast_t* ty_ast2 = (ty_ast_t*) func_decl_ast2->ty;
+  char* arg_name21 = func_decl_ast2->arg_names[0];
+  char* arg_name22 = func_decl_ast2->arg_names[1];
+  ty_ast_t* arg_ty_ast21 = (ty_ast_t*) func_decl_ast2->arg_tys[0];
+  ty_ast_t* arg_ty_ast22 = (ty_ast_t*) func_decl_ast2->arg_tys[1];
+
+  assert(ast1->type == AST_FUNC);
+  assert(strcmp(func_decl_ast1->name, "fib") == 0);
+  assert(strcmp(ty_ast1->name, "i32") == 0);
+  assert(func_decl_ast1->arg_count == 1);
+  assert(strcmp(arg_name1, "n") == 0);
+  assert(strcmp(arg_ty_ast1->name, "i32") == 0);
+
+  assert(ast2->type == AST_FUNC);
+  assert(strcmp(func_decl_ast2->name, "log") == 0);
+  assert(strcmp(ty_ast2->name, "f32") == 0);
+  assert(func_decl_ast2->arg_count == 2);
+  assert(strcmp(arg_name21, "base") == 0);
+  assert(strcmp(arg_ty_ast21->name, "f32") == 0);
+  assert(strcmp(arg_name22, "n") == 0);
+  assert(strcmp(arg_ty_ast22->name, "f32") == 0);
+
+  destroy_ast(ast1);
+  destroy_ast(ast2);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
+
+  return 0;
+}
+TEST(parser, struct) {
+  lexer_t* lexer = create_lexer(
+    "struct a {\n"
+      "let foo: i32;\n"
+      "let bar: f32;\n"
+    "}"
+    );
+  parser_t* parser = create_parser(lexer);
+
   ast_t* ast = parser_parse(parser);
-  func_ast_t* func_ast = (func_ast_t*) ast;
-  func_decl_ast_t* func_decl_ast = (func_decl_ast_t*) func_ast->decl;
-  ty_ast_t* ty_ast = (ty_ast_t*) func_decl_ast->ty;
-  char* arg_name_ast = func_decl_ast->arg_names[0];
-  ty_ast_t* arg_ty_ast = (ty_ast_t*) func_decl_ast->arg_tys[0];
+  struct_ast_t* struct_ast = (struct_ast_t*) ast;
+  body_ast_t* body_ast = (body_ast_t*) struct_ast->body;
+  let_ast_t* let_ast1 = (let_ast_t*) body_ast->stmts[0];
+  let_ast_t* let_ast2 = (let_ast_t*) body_ast->stmts[1];
+  ty_ast_t* let_ty_ast1 = (ty_ast_t*) let_ast1->ty;
+  ty_ast_t* let_ty_ast2 = (ty_ast_t*) let_ast2->ty;
 
-  assert(ast->type == AST_FUNC);
-  assert(strcmp(func_decl_ast->name, "fib") == 0);
-  assert(strcmp(ty_ast->name, "i32") == 0);
-  assert(func_decl_ast->arg_count == 1);
-  assert(strcmp(arg_name_ast, "n") == 0);
-  assert(strcmp(arg_ty_ast->name, "i32") == 0);
+  assert(struct_ast->type == AST_STRUCT);
+  assert(strcmp(struct_ast->name, "a") == 0);
+  assert(strcmp(let_ast1->name, "i32") == 0);
+  assert(strcmp(let_ast2->name, "f32") == 0);
+  assert(strcmp(let_ty_ast1->name, "i32") == 0);
+  assert(strcmp(let_ty_ast2->name, "f32") == 0);
 
-  destroy_ast(ast);
+
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -244,6 +296,7 @@ TEST(parser, loop) {
 
   return 0;
 }
+
 
 
 

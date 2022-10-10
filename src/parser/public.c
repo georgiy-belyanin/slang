@@ -1,6 +1,7 @@
 #include "public.h"
 
 #include <stdlib.h>
+#include "ext_parser.h"
 #include "func_parser.h"
 #include "parser.h"
 #include "struct_parser.h"
@@ -23,6 +24,8 @@ ast_t* parser_parse(parser_t* parser) {
     return parser_parse_func(parser);
   else if (parser->cur == TOKEN_STRUCT) 
     return parser_parse_struct(parser);
+  else if (parser->cur == TOKEN_EXT)
+    return parser_parse_ext(parser);
   else if (parser->cur == TOKEN_EOF) 
     return NULL;
 

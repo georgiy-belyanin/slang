@@ -5,6 +5,7 @@
 #include "bin_ast.h"
 #include "body_ast.h"
 #include "call_ast.h"
+#include "ext_ast.h"
 #include "func_ast.h"
 #include "func_decl_ast.h"
 #include "if_ast.h"

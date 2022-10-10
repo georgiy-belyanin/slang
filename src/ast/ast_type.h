@@ -22,6 +22,7 @@ typedef enum {
   AST_BODY,
 
   AST_STRUCT,
+  AST_EXT,
 
   AST_FUNC_DECL,
   AST_FUNC,

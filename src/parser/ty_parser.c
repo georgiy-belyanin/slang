@@ -15,8 +15,6 @@ static ast_t* parser_parse_ptr_ty(parser_t* parser) {
   return create_ptr_ty_ast(parser_parse_ty(parser));
 }
 
-#include <stdio.h>
-
 ast_t* parser_parse_ty(parser_t* parser) {
   if (parser->cur == TOKEN_UPTR) 
     return parser_parse_uptr_ty(parser);
