@@ -26,6 +26,10 @@ TEST(codegen, testy) {
   codegen_gen(codegen, parser_parse(parser));
   codegen_dump(codegen);
 
+  destroy_codegen(codegen);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
+
   return 0;
 }
 

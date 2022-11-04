@@ -25,8 +25,6 @@ lexer_t* create_lexer(char* code) {
 }
 void destroy_lexer(lexer_t* lexer) {
   // free(lexer->code);
-  // free(lexer->ident);
-  // free(lexer->str);
   free(lexer);
 }
 

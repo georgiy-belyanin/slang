@@ -75,7 +75,7 @@ TEST(parser, struct) {
   assert(strcmp(let_ty_ast1->name, "i32") == 0);
   assert(strcmp(let_ty_ast2->name, "f32") == 0);
 
-
+  destroy_ast(ast);
   destroy_parser(parser);
   destroy_lexer(lexer);
 
@@ -98,6 +98,8 @@ TEST(parser, let) {
   assert(strcmp(ty_ast->name, "i32") == 0);
 
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -115,6 +117,8 @@ TEST(parser, ret) {
   assert(ret_ast->type == AST_RET);
 
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -134,6 +138,8 @@ TEST(parser, int) {
   assert(int_ast->val == 10);
 
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -153,6 +159,8 @@ TEST(parser, real) {
   assert(real_ast->val == 10.0);
 
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -175,6 +183,8 @@ TEST(parser, call) {
   assert(arg_ast->val == 1);
 
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -206,6 +216,8 @@ TEST(parser, bin) {
   assert(int_ast2->val == 4);
 
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -227,6 +239,8 @@ TEST(parser, body) {
   assert(ret_ast->type == AST_RET);
   
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -250,6 +264,8 @@ TEST(parser, if) {
   assert(ret_ast->type == AST_RET);
   
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -273,6 +289,8 @@ TEST(parser, while) {
   assert(ret_ast->type == AST_RET);
   
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }
@@ -293,6 +311,8 @@ TEST(parser, loop) {
   assert(ret_ast->type == AST_RET);
   
   destroy_ast(ast);
+  destroy_parser(parser);
+  destroy_lexer(lexer);
 
   return 0;
 }

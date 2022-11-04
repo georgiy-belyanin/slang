@@ -8,133 +8,159 @@
 TEST(lexer, trait) {
   lexer_t* lexer = create_lexer("trait");
   assert(lexer_next_token(lexer) == TOKEN_TRAIT);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, struct) {
   lexer_t* lexer = create_lexer("struct");
   assert(lexer_next_token(lexer) == TOKEN_STRUCT);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, func) {
   lexer_t* lexer = create_lexer("func");
   assert(lexer_next_token(lexer) == TOKEN_FUNC);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, let) {
   lexer_t* lexer = create_lexer("let");
   assert(lexer_next_token(lexer) == TOKEN_LET);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, ret) {
   lexer_t* lexer = create_lexer("ret");
   assert(lexer_next_token(lexer) == TOKEN_RET);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, ext) {
   lexer_t* lexer = create_lexer("ext");
   assert(lexer_next_token(lexer) == TOKEN_EXT);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, if) {
   lexer_t* lexer = create_lexer("if");
   assert(lexer_next_token(lexer) == TOKEN_IF);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, else) {
   lexer_t* lexer = create_lexer("else");
   assert(lexer_next_token(lexer) == TOKEN_ELSE);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, while) {
   lexer_t* lexer = create_lexer("while");
   assert(lexer_next_token(lexer) == TOKEN_WHILE);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, loop) {
   lexer_t* lexer = create_lexer("loop");
   assert(lexer_next_token(lexer) == TOKEN_LOOP);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, new) {
   lexer_t* lexer = create_lexer("new");
   assert(lexer_next_token(lexer) == TOKEN_NEW);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, del) {
   lexer_t* lexer = create_lexer("del");
   assert(lexer_next_token(lexer) == TOKEN_DEL);
+  destroy_lexer(lexer);
   return 0;
 }
 
 TEST(lexer, true) {
   lexer_t* lexer = create_lexer("true");
   assert(lexer_next_token(lexer) == TOKEN_TRUE);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, false) {
   lexer_t* lexer = create_lexer("false");
   assert(lexer_next_token(lexer) == TOKEN_FALSE);
+  destroy_lexer(lexer);
   return 0;
 }
 
 TEST(lexer, colon) {
   lexer_t* lexer = create_lexer(":");
   assert(lexer_next_token(lexer) == TOKEN_COLON);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, semi) {
   lexer_t* lexer = create_lexer(";");
   assert(lexer_next_token(lexer) == TOKEN_SEMI);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, dot) {
   lexer_t* lexer = create_lexer(".");
   assert(lexer_next_token(lexer) == TOKEN_DOT);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, comma) {
   lexer_t* lexer = create_lexer(",");
   assert(lexer_next_token(lexer) == TOKEN_COMMA);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, lparen) {
   lexer_t* lexer = create_lexer("(");
   assert(lexer_next_token(lexer) == TOKEN_LPAREN);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, rparen) {
   lexer_t* lexer = create_lexer(")");
   assert(lexer_next_token(lexer) == TOKEN_RPAREN);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, lblock) {
   lexer_t* lexer = create_lexer("{");
   assert(lexer_next_token(lexer) == TOKEN_LBLOCK);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, rblock) {
   lexer_t* lexer = create_lexer("}");
   assert(lexer_next_token(lexer) == TOKEN_RBLOCK);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, lbracket) {
   lexer_t* lexer = create_lexer("[");
   assert(lexer_next_token(lexer) == TOKEN_LBRACKET);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, rbracket) {
   lexer_t* lexer = create_lexer("]");
   assert(lexer_next_token(lexer) == TOKEN_RBRACKET);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, uptr) {
   lexer_t* lexer = create_lexer("@");
   assert(lexer_next_token(lexer) == TOKEN_UPTR);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, sptr) {
   lexer_t* lexer = create_lexer("~");
   assert(lexer_next_token(lexer) == TOKEN_SPTR);
+  destroy_lexer(lexer);
   return 0;
 }
 
@@ -142,84 +168,100 @@ TEST(lexer, sptr) {
 TEST(lexer, assign) {
   lexer_t* lexer = create_lexer("=");
   assert(lexer_next_token(lexer) == TOKEN_ASSIGN);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, add) {
   lexer_t* lexer = create_lexer("+");
   assert(lexer_next_token(lexer) == TOKEN_ADD);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, sub) {
   lexer_t* lexer = create_lexer("-");
   assert(lexer_next_token(lexer) == TOKEN_SUB);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, mul) {
   lexer_t* lexer = create_lexer("*");
   assert(lexer_next_token(lexer) == TOKEN_MUL);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, div) {
   lexer_t* lexer = create_lexer("/");
   assert(lexer_next_token(lexer) == TOKEN_DIV);
+  destroy_lexer(lexer);
   return 0;
 }
 
 TEST(lexer, eq) {
   lexer_t* lexer = create_lexer("==");
   assert(lexer_next_token(lexer) == TOKEN_EQ);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, ne) {
   lexer_t* lexer = create_lexer("!=");
   assert(lexer_next_token(lexer) == TOKEN_NE);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, less) {
   lexer_t* lexer = create_lexer("<");
   assert(lexer_next_token(lexer) == TOKEN_LESS);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, le) {
   lexer_t* lexer = create_lexer("<=");
   assert(lexer_next_token(lexer) == TOKEN_LE);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, grtr) {
   lexer_t* lexer = create_lexer(">");
   assert(lexer_next_token(lexer) == TOKEN_GRTR);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, ge) {
   lexer_t* lexer = create_lexer(">=");
   assert(lexer_next_token(lexer) == TOKEN_GE);
+  destroy_lexer(lexer);
   return 0;
 }
 
 TEST(lexer, not) {
   lexer_t* lexer = create_lexer("!");
   assert(lexer_next_token(lexer) == TOKEN_NOT);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, and) {
   lexer_t* lexer = create_lexer("&&");
   assert(lexer_next_token(lexer) == TOKEN_AND);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, or) {
   lexer_t* lexer = create_lexer("||");
   assert(lexer_next_token(lexer) == TOKEN_OR);
+  destroy_lexer(lexer);
   return 0;
 }
 
 TEST(lexer, bwand) {
   lexer_t* lexer = create_lexer("&");
   assert(lexer_next_token(lexer) == TOKEN_BWAND);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, bwor) {
   lexer_t* lexer = create_lexer("|");
   assert(lexer_next_token(lexer) == TOKEN_BWOR);
+  destroy_lexer(lexer);
   return 0;
 }
 
@@ -229,6 +271,7 @@ TEST(lexer, ident) {
   assert(strcmp(lexer_get_ident(lexer), "foo") == 0);
   assert(lexer_next_token(lexer) == TOKEN_IDENT);
   assert(strcmp(lexer_get_ident(lexer), "bar") == 0);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, int) {
@@ -237,6 +280,7 @@ TEST(lexer, int) {
   assert(lexer_get_int(lexer) == 23);
   assert(lexer_next_token(lexer) == TOKEN_INT);
   assert(lexer_get_int(lexer) == 46);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, real) {
@@ -245,6 +289,7 @@ TEST(lexer, real) {
   assert(lexer_get_real(lexer) == 42.13);
   assert(lexer_next_token(lexer) == TOKEN_REAL);
   assert(lexer_get_real(lexer) == 23.5);
+  destroy_lexer(lexer);
   return 0;
 }
 TEST(lexer, str) {
@@ -253,6 +298,7 @@ TEST(lexer, str) {
   assert(lexer_get_real(lexer) == 42.13);
   assert(lexer_next_token(lexer) == TOKEN_REAL);
   assert(lexer_get_real(lexer) == 23.5);
+  destroy_lexer(lexer);
   return 0;
 }
 
@@ -303,7 +349,7 @@ TEST(lexer, complex) {
   assert(lexer_next_token(lexer) == TOKEN_SEMI);
   assert(lexer_next_token(lexer) == TOKEN_RBLOCK);
 
-  //destroy_lexer(lexer);
+  destroy_lexer(lexer);
 
   return 0;
 }
